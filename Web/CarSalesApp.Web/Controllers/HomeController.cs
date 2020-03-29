@@ -2,6 +2,8 @@
 {
     using System.Diagnostics;
 
+    using CarSalesApp.Data.Common.Repositories;
+
     using CarSalesApp.Web.ViewModels;
 
     using Microsoft.AspNetCore.Mvc;
