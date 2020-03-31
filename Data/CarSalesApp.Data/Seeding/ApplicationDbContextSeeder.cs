@@ -27,6 +27,12 @@
                           {
                               new RolesSeeder(),
                               new SettingsSeeder(),
+                              new BodiesSeeder(),
+                              new MakesSeeder(),
+                              new CarsSeeder(),
+                              new ModelsSeeder(),
+                              new FeaturesSeeder(),
+                              new DrivesSeeder(),
                           };
 
             foreach (var seeder in seeders)

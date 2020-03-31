@@ -36,6 +36,8 @@
 
         public DbSet<Model> Models { get; set; }
 
+        public DbSet<Feature> Features { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
