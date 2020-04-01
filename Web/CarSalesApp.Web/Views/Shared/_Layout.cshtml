@@ -13,6 +13,8 @@
     <environment names="Staging,Production">
         <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
         <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
+        <link href="~/js/site.js" rel="stylesheet" asp-append-version="true" />
+        <link href="~/js/site.min.js" rel="stylesheet" asp-append-version="true" />
     </environment>
 </head>
 <body>
@@ -36,19 +38,22 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="CreateAdCar">Sell Your Car</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    
+
     <div class="container">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @this.RenderBody()
         </main>
     </div>
-    
+
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
