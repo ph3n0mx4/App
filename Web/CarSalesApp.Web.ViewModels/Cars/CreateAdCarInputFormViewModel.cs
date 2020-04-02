@@ -7,25 +7,20 @@ namespace CarSalesApp.Web.ViewModels.Cars
 {
     public class CreateAdCarInputFormViewModel
     {
-        public IEnumerable<MakeAndModelViewModel> falseMakes { get; set; }
-        public string Name { get; set; }
-
         public int MakeId { get; set; }
 
-        public IEnumerable<Make> Makes { get; set; }
+        public IEnumerable<MakeInputViewModel> Makes { get; set; }
 
         public int ModelId { get; set; }
 
-        public IEnumerable<Model> Models { get; set; }
+        public IEnumerable<ModelInputViewModel> Models { get; set; }
+
+        public int DriveId { get; set; }
 
         public IEnumerable<Drive> Drives { get; set; }
 
+        public int BodyId { get; set; }
+
         public IEnumerable<BodyInputViewModel> Bodies { get; set; }
-
-        public string Make { get; set; }
-
-        public string Model { get; set; }
-
-        public string Body { get; set; }
     }
 }
