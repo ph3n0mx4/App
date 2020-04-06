@@ -23,7 +23,7 @@ namespace CarSalesApp.Web.Controllers
         }
 
         [HttpGet("getmodels")]
-        public ActionResult<SelectList> GetLeagues(int makeId)
+        public ActionResult<SelectList> GetModels(int makeId)
         {
             var models = new SelectList(this.db.Models.Where(c => c.MakeId == makeId).ToList(), "Id", "Name");
 
