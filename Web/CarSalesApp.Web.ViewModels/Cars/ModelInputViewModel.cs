@@ -8,11 +8,7 @@ namespace CarSalesApp.Web.ViewModels.Cars
 {
     public class ModelInputViewModel : IMapFrom<Model>
     {
-        public string Name { get; set; }
-
-        public int MakeId { get; set; }
-
-        public virtual Make Make { get; set; }
+        
 
     }
 }
