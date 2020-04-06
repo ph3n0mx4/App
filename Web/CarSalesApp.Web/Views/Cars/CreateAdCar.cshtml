@@ -1,0 +1,70 @@
+﻿@model CarSalesApp.Web.ViewModels.Cars.CreateAdCarInputFormViewModel
+@{
+    ViewData["Title"] = "CreateAdCar";
+    var makes = Model.Makes.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
+}
+
+<h1>CreateAdCar</h1>
+@*<form method="get" action="/Home/Privacy">
+        <button type="submit" class="btn btn-primary">Privacy</button>
+    </form>*@
+<form id="az">
+    <button type="submit" class="btn btn-primary">Privacy</button>
+</form>
+
+<form class="form-group col-md-4" asp-controller="Cars" asp-action="CreateAdCar" method="post">
+    <div class="form-group">
+        <label asp-for="MakeId">Makes</label>
+        <select asp-for="MakeId" asp-items="@makes" id="makeList" class="form-control btn btn-secondary dropdown-toggle">
+            <option>--Select Make--</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="ModelId">Model </label>
+        <select asp-for="ModelId" id="modelId" class="selectpicker form-control btn btn-secondary dropdown-toggle">
+            <option>--Select Model--</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="BodyId">Bodies</label>
+        <select asp-for="BodyId" class="form-control btn btn-secondary dropdown-toggle">
+            <option>--Select Body--</option>
+            @foreach (var cBody in Model.Bodies)
+            {
+                <option  value="@cBody.Id">@cBody.Title</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+<script type="text/javascript">
+    //Insert default item "Select" in dropdownlist on load
+    //$(document).ready(function () {
+    //    var items = "<option value='0'>--Select Models--</option>";
+    //    $("#modelId").html(items);
+    //});
+    //Bind League dropdownlist
+    $("#makeList").change(function () {
+        var makeId = $("#makeList").val();
+        var url = "/api/data/getmodels";
+
+        $.getJSON(url, { makeId: makeId }, function (data) {
+            var item = "";
+            $("#modelId").empty();
+            $.each(data, function (i, model) {
+                item += '<option value="' + model.value + '">' + model.text + '</option>'
+                    });
+            $("#modelId").html(item);
+        });
+    });
+
+</script>
+}
+
+
+
+

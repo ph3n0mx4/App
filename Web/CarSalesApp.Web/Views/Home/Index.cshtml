@@ -1,0 +1,38 @@
+﻿@using CarSalesApp.Common
+@model CarSalesApp.Web.ViewModels.Home.IndexViewModel
+
+@{
+    this.ViewData["Title"] = "Home Page";
+}
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+        @foreach (var car in Model.Cars)
+        {
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="@car.GeneralImg" class="card-img" alt="GeneralImage">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">@car.Title</h5>
+                            <p class="card-text">@car.Power</p>
+                            <p class="card-text">@car.Description</p>
+                            <p class="card-text">@car.FirstRegistration</p>
+                            <p class="card-text"><small class="text-muted">@car.CreatedOn ( if modified on is null) or @car.ModifiedOn</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+<form method="get" action="/Home/Privacy">
+    <button type="submit" class="btn btn-primary">Privacy</button>
+</form>
+<!--<button type="submit" class="btn" <a href="/Home/Privacy"</a>Privacy></button>
+<a class="nav-link text-dark" asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>-->
+
