@@ -8,7 +8,5 @@ namespace CarSalesApp.Web.ViewModels.Cars
 {
     public class ModelInputViewModel : IMapFrom<Model>
     {
-        
-
     }
 }

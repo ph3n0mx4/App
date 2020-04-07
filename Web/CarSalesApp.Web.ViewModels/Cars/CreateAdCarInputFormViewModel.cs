@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using CarSalesApp.Data.Models.Enums;
+
 
 namespace CarSalesApp.Web.ViewModels.Cars
 {
@@ -22,5 +24,9 @@ namespace CarSalesApp.Web.ViewModels.Cars
         public int BodyId { get; set; }
 
         public IEnumerable<BodyInputViewModel> Bodies { get; set; }
+
+        public MonthsOfYear Month { get; set; }
+
+        public int Year { get; set; }
     }
 }

@@ -60,9 +60,9 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<ICarService, CarService>();
-            //services.AddTransient<IMakeCarService, MakeCarService>();
-            //services.AddTransient<IModelCarService, ModelCarService>();
-            //services.AddTransient<IBodyCarService, BodyCarService>();
+            services.AddTransient<IMakeCarService, MakeCarService>();
+            services.AddTransient<IModelCarService, ModelCarService>();
+            services.AddTransient<IBodyCarService, BodyCarService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
