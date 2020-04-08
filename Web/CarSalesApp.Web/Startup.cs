@@ -12,7 +12,7 @@
     using CarSalesApp.Services.Mapping;
     using CarSalesApp.Services.Messaging;
     using CarSalesApp.Web.ViewModels;
-
+    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -51,6 +51,14 @@
 
             services.AddSingleton(this.configuration);
 
+            Account account = new Account(
+                this.configuration["Cloudinary:AppName"],
+                this.configuration["Cloudinary:AppKey"],
+                this.configuration["Cloudinary:AppSecret"]);
+
+            Cloudinary cloudinary = new Cloudinary(account);
+            services.AddSingleton(cloudinary);
+
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
@@ -63,6 +71,7 @@
             services.AddTransient<IMakeCarService, MakeCarService>();
             services.AddTransient<IModelCarService, ModelCarService>();
             services.AddTransient<IBodyCarService, BodyCarService>();
+            services.AddTransient<ICloudinaryService, CloudinaryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -9,6 +9,8 @@ using CarSalesApp.Web.ViewModels.Cars;
 using Microsoft.AspNetCore.Mvc;
 using CarSalesApp.Services.Mapping;
 using CarSalesApp.Services.Data;
+using CloudinaryDotNet;
+using Microsoft.AspNetCore.Http;
 
 namespace CarSalesApp.Web.Controllers
 {
@@ -19,14 +21,18 @@ namespace CarSalesApp.Web.Controllers
         private readonly IMakeCarService makeCarService;
         private readonly IBodyCarService bodyCarService;
         private readonly ApplicationDbContext db;
+        private readonly Cloudinary cloudinary;
+        private readonly ICloudinaryService cloudinaryService;
 
-        public CarsController(/*ICarService carService, */IModelCarService modelCarService, IMakeCarService makeCarService, IBodyCarService bodyCarService, ApplicationDbContext db)
+        public CarsController(/*ICarService carService, */IModelCarService modelCarService, IMakeCarService makeCarService, IBodyCarService bodyCarService, ApplicationDbContext db, Cloudinary cloudinary, ICloudinaryService cloudinaryService)
         {
             //this.carService = carService;
             this.modelCarService = modelCarService;
             this.makeCarService = makeCarService;
             this.bodyCarService = bodyCarService;
             this.db = db;
+            this.cloudinary = cloudinary;
+            this.cloudinaryService = cloudinaryService;
         }
 
         public IActionResult CreateAdCar()
@@ -36,27 +42,12 @@ namespace CarSalesApp.Web.Controllers
             viewModel.Models = this.modelCarService.GetAll<ModelInputViewModel>();
             viewModel.Bodies = this.bodyCarService.GetAll<BodyInputViewModel>();
 
-            //var bodies = this.db
-            //    .Bodies
-            //    .To<BodyInputViewModel>()
-            //    .ToList();
-
-            //viewModel.Bodies = bodies;
-
-            //var makes = this.db.Makes.To<MakeInputViewModel>().ToList();
-            //var models = this.db.Models.To<ModelInputViewModel>().ToList();
-            //viewModel.Makes = makes;
-            //viewModel.Models = models;
-
-
             return this.View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult CreateAdCar(CreateAdCarInputFormViewModel input)
+        public async Task<IActionResult> CreateAdCar(CreateAdCarInputFormViewModel input)
         {
-            
-                
             var opel = this.db.Makes
                 .Where(x => x.Name == "Opel")
                 .Select(x => x.Models).ToList();
@@ -69,6 +60,17 @@ namespace CarSalesApp.Web.Controllers
                 })
                 .FirstOrDefault();
             var a = input;
+            var images = await this.cloudinaryService.UploadAsync(this.cloudinary, input.Files);
+            return this.Redirect("/");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Upload(ICollection<IFormFile> files)
+        {
+            var a = await this.cloudinaryService.UploadAsync(this.cloudinary, files);
+
+            ;
+
             return this.Redirect("/");
         }
     }

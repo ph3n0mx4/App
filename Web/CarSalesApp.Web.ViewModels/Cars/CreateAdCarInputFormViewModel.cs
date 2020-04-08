@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using CarSalesApp.Data.Models.Enums;
-
+using Microsoft.AspNetCore.Http;
 
 namespace CarSalesApp.Web.ViewModels.Cars
 {
@@ -28,5 +28,7 @@ namespace CarSalesApp.Web.ViewModels.Cars
         public MonthsOfYear Month { get; set; }
 
         public int Year { get; set; }
+
+        public ICollection<IFormFile> Files { get; set; }
     }
 }

@@ -6,7 +6,7 @@
     var makes = Model.Makes.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
     var year = DateTime.Now.Year;
     var year2 = Enumerable.Range(DateTime.Now.Year, 100).ToList();
-    
+
 
 }
 
@@ -16,7 +16,7 @@
     <button type="submit" class="btn btn-primary">Privacy</button>
 </form>
 
-<form class="form-group col-md-4" asp-controller="Cars" asp-action="CreateAdCar" method="post">
+<form class="form-group col-md-4" asp-controller="Cars" asp-action="CreateAdCar" method="post" enctype="multipart/form-data">
     <div class="form-group">
 
 
@@ -47,11 +47,21 @@
         </select>
 
         <label asp-for="Year">Years</label>
-        @Html.DropDownList("Year", new SelectList(Enumerable.Range(1950, DateTime.UtcNow.Year-1950+1).ToList()), "-- Select Year --", new { @class = "form-control btn btn-secondary dropdown-toggle" })
+        @Html.DropDownList("Year", new SelectList(Enumerable.Range(1950, DateTime.UtcNow.Year - 1950 + 1).ToList()), "-- Select Year --", new { @class = "form-control btn btn-secondary dropdown-toggle" })
 
+    </div>
+    <div>
+        <label asp-for="Files">Files</label>
+        <input asp-for="Files" type="file"  name="Files" multiple>
     </div>
     <button type="submit" class="btn btn-primary">Add</button>
 </form>
+
+@*<form method="post" enctype="multipart/form-data" asp-controller="Cars" asp-action="Upload">
+    <input type="file" name="files" multiple>    
+    <input type="submit" class="btn" value="Upload">/>
+</form>*@
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
