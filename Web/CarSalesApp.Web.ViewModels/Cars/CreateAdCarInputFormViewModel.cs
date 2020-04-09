@@ -19,7 +19,7 @@ namespace CarSalesApp.Web.ViewModels.Cars
 
         public int DriveId { get; set; }
 
-        public IEnumerable<Drive> Drives { get; set; }
+        public IEnumerable<DriveInputViewModel> Drives { get; set; }
 
         public int BodyId { get; set; }
 
@@ -30,5 +30,9 @@ namespace CarSalesApp.Web.ViewModels.Cars
         public int Year { get; set; }
 
         public ICollection<IFormFile> Files { get; set; }
+
+        public int FuelId { get; set; }
+
+        public ColorType Color { get; set; }
     }
 }

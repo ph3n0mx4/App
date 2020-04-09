@@ -28,6 +28,10 @@
 
         public Model Model { get; set; }
 
+        public DateTime YearFrom { get; set; }
+
+        public DateTime YearTo { get; set; }
+
         public virtual ICollection<Car> Cars { get; set; }
     }
 }

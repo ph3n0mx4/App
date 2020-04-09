@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace CarSalesApp.Data.Models.Enums
@@ -13,8 +14,10 @@ namespace CarSalesApp.Data.Models.Enums
         LPG = 4,
         CNG = 5,
         [Description("Hybrid - Electric & Petrol")]
+        [Display(Name = "Hybrid - Electric & Petrol")]
         HybridPetrol = 6,
         [Description("Hybrid - Electric & Diesel")]
+        [Display(Name = "Hybrid - Electric & Diesel")]
         HybridDiesel = 7,
         Other = 8,
     }

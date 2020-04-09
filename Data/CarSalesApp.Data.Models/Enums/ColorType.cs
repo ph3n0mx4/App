@@ -6,7 +6,7 @@ namespace CarSalesApp.Data.Models.Enums
 {
     public enum ColorType
     {
-        Red,
+        Red=1,
         Silver,
     }
 }

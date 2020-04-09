@@ -4,8 +4,8 @@
 @{
     ViewData["Title"] = "CreateAdCar";
     var makes = Model.Makes.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
-    var year = DateTime.Now.Year;
-    var year2 = Enumerable.Range(DateTime.Now.Year, 100).ToList();
+    var bodies = Model.Bodies.Select(x => new SelectListItem(x.Title, x.Id.ToString()));
+
 
 
 }
@@ -30,14 +30,15 @@
             <option>--Select Model--</option>
         </select>
 
-
         <label asp-for="BodyId">Bodies</label>
-        <select asp-for="BodyId" class="form-control btn btn-secondary dropdown-toggle">
+        <select asp-for="BodyId" asp-items="@bodies" id="bodyList" class="form-control btn btn-secondary dropdown-toggle">
             <option>--Select Body--</option>
-            @foreach (var cBody in Model.Bodies)
-            {
-                <option value="@cBody.Id">@cBody.Title</option>
-            }
+        </select>
+
+        <label asp-for="Color">Colors</label>
+        <select asp-for="Color" asp-items="Html.GetEnumSelectList<ColorType>()"
+                class="form-control btn btn-secondary dropdown-toggle">
+            <option>--Select Color--</option>
         </select>
 
         <label asp-for="Month">Months</label>
@@ -49,11 +50,23 @@
         <label asp-for="Year">Years</label>
         @Html.DropDownList("Year", new SelectList(Enumerable.Range(1950, DateTime.UtcNow.Year - 1950 + 1).ToList()), "-- Select Year --", new { @class = "form-control btn btn-secondary dropdown-toggle" })
 
-    </div>
-    <div>
+
+        <label asp-for="FuelId">Fuel</label>
+        <select asp-for="FuelId" id="fuelList" asp-items="Html.GetEnumSelectList<FuelType>()"
+                class="form-control btn btn-secondary dropdown-toggle">
+            <option>--Select Fuel--</option>
+        </select>
+        <span>
+            <label asp-for="DriveId">Drives</label>
+            <select asp-for="DriveId" id="driveId" class="selectpicker form-control btn btn-secondary dropdown-toggle">
+                <option>--Select Drives--</option>
+            </select>
+        </span>
+        <br />
         <label asp-for="Files">Files</label>
-        <input asp-for="Files" type="file"  name="Files" multiple>
+        <input asp-for="Files" type="file" name="Files" multiple>
     </div>
+    <br />
     <button type="submit" class="btn btn-primary">Add</button>
 </form>
 
@@ -67,15 +80,10 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script type="text/javascript">
-        //Insert default item "Select" in dropdownlist on load
-        //$(document).ready(function () {
-        //    var items = "<option value='0'>--Select Models--</option>";
-        //    $("#modelId").html(items);
-        //});
-        //Bind League dropdownlist
+        
         $("#makeList").change(function () {
             var makeId = $("#makeList").val();
-            var url = "/api/data/getmodels";
+            var url = "/api/data/getModels";
 
             $.getJSON(url, { makeId: makeId }, function (data) {
                 var item = "";
@@ -84,6 +92,21 @@
                     item += '<option value="' + model.value + '">' + model.text + '</option>'
                 });
                 $("#modelId").html(item);
+            });
+        });
+
+        $("#fuelList").change(function () {
+            var fuelId = $("#fuelList").val();
+            var modelId = $("#modelId").val();
+            var url = "/api/data/getDrives";
+
+            $.getJSON(url, { modelId: modelId, fuelId: fuelId }, function (data) {
+                var item = "";
+                $("#driveId").empty();
+                $.each(data, function (i, drive) {
+                    item += '<option value="' + drive.value + '">' + drive.text + '</option>'
+                });
+                $("#driveId").html(item);
             });
         });
 
