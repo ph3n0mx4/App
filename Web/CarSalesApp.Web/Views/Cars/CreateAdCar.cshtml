@@ -16,71 +16,92 @@
     <button type="submit" class="btn btn-primary">Privacy</button>
 </form>
 
-<form class="form-group col-md-4" asp-controller="Cars" asp-action="CreateAdCar" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-
-
-        <label asp-for="MakeId">Makes</label>
-        <select asp-for="MakeId" asp-items="@makes" id="makeList" class="form-control btn btn-secondary dropdown-toggle">
-            <option>--Select Make--</option>
-        </select>
-
-        <label asp-for="ModelId">Model </label>
-        <select asp-for="ModelId" id="modelId" class="selectpicker form-control btn btn-secondary dropdown-toggle">
-            <option>--Select Model--</option>
-        </select>
-
-        <label asp-for="BodyId">Bodies</label>
-        <select asp-for="BodyId" asp-items="@bodies" id="bodyList" class="form-control btn btn-secondary dropdown-toggle">
-            <option>--Select Body--</option>
-        </select>
-
-        <label asp-for="Color">Colors</label>
-        <select asp-for="Color" asp-items="Html.GetEnumSelectList<ColorType>()"
-                class="form-control btn btn-secondary dropdown-toggle">
-            <option>--Select Color--</option>
-        </select>
-
-        <label asp-for="Month">Months</label>
-        <select asp-for="Month" asp-items="Html.GetEnumSelectList<MonthsOfYear>()"
-                class="form-control btn btn-secondary dropdown-toggle">
-            <option>--Select Month--</option>
-        </select>
-
-        <label asp-for="Year">Years</label>
-        @Html.DropDownList("Year", new SelectList(Enumerable.Range(1950, DateTime.UtcNow.Year - 1950 + 1).ToList()), "-- Select Year --", new { @class = "form-control btn btn-secondary dropdown-toggle" })
-
-
-        <label asp-for="FuelId">Fuel</label>
-        <select asp-for="FuelId" id="fuelList" asp-items="Html.GetEnumSelectList<FuelType>()"
-                class="form-control btn btn-secondary dropdown-toggle">
-            <option>--Select Fuel--</option>
-        </select>
-        <span>
+<form class="form-group container-fluid" asp-controller="Cars" asp-action="CreateAdCar" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-4">
+            <label asp-for="MakeId">Makes</label>
+            <select asp-for="MakeId" asp-items="@makes" id="makeList" class="form-control btn btn-secondary dropdown-toggle">
+                <option>--Select Make--</option>
+            </select>
+        </div>
+        @*</div>*@
+        <div class="col-md-4">
+            <label asp-for="ModelId">Model </label>
+            <select asp-for="ModelId" id="modelId" class="selectpicker form-control btn btn-secondary dropdown-toggle">
+                <option>--Select Model--</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="BodyId">Bodies</label>
+            <select asp-for="BodyId" asp-items="@bodies" id="bodyList" class="form-control btn btn-secondary dropdown-toggle">
+                <option>--Select Body--</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Color">Colors</label>
+            <select asp-for="Color" asp-items="Html.GetEnumSelectList<ColorType>()"
+                    class="form-control btn btn-secondary dropdown-toggle">
+                <option>--Select Color--</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Month">Months</label>
+            <select asp-for="Month" asp-items="Html.GetEnumSelectList<MonthsOfYear>()"
+                    class="form-control btn btn-secondary dropdown-toggle">
+                <option>--Select Month--</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Year">Years</label>
+            @Html.DropDownList("Year", new SelectList(Enumerable.Range(1950, DateTime.UtcNow.Year - 1950 + 1).ToList()), "-- Select Year --", new { @class = "form-control btn btn-secondary dropdown-toggle" })
+        </div>
+        <div class="col-md-4">
+            <label asp-for="FuelId">Fuel</label>
+            <select asp-for="FuelId" id="fuelList" asp-items="Html.GetEnumSelectList<FuelType>()"
+                    class="form-control btn btn-secondary dropdown-toggle">
+                <option>--Select Fuel--</option>
+            </select>
+        </div>
+        <div class="col-md-4">
             <label asp-for="DriveId">Drives</label>
             <select asp-for="DriveId" id="driveId" class="selectpicker form-control btn btn-secondary dropdown-toggle">
                 <option>--Select Drives--</option>
             </select>
-        </span>
-        <br />
-        <label asp-for="Files">Files</label>
-        <input asp-for="Files" type="file" name="Files" multiple>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Files">Files</label>
+            <input asp-for="Files" type="file" class="btn btn-secondary @*toggle*@" name="Files" multiple>
+        </div>
+
+
+        <div class="col-md">
+            <button type="submit" class="btn btn-secondary">Add</button>
+        </div>
     </div>
-    <br />
-    <button type="submit" class="btn btn-primary">Add</button>
 </form>
 
+<div class="ui-filter-slider">
+    <div class="sidebar-widget-body m-t-10">
+        <div class="price-range-holder">
+            <span class="min-max"> <span class="pull-left">$200.00</span> <span class="pull-right">$800.00</span> </span>
+            <input type="range" class="price-slider" value="" style="display:block">
+        </div>
+        <!-- /.price-range-holder -->
+    </div>
+</div>
+
+
 @*<form method="post" enctype="multipart/form-data" asp-controller="Cars" asp-action="Upload">
-    <input type="file" name="files" multiple>    
-    <input type="submit" class="btn" value="Upload">/>
-</form>*@
+        <input type="file" name="files" multiple>
+        <input type="submit" class="btn" value="Upload">/>
+    </form>*@
 
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script type="text/javascript">
-        
+
         $("#makeList").change(function () {
             var makeId = $("#makeList").val();
             var url = "/api/data/getModels";
