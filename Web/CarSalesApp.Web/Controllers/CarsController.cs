@@ -73,5 +73,17 @@ namespace CarSalesApp.Web.Controllers
 
             return this.Redirect("/");
         }
+
+        public IActionResult DetailsAdCar(int id)
+        {
+            var carViewModel = this.db.Cars.Where(x => x.Id == id).To<CarAdViewModel>().FirstOrDefault();
+
+            if (carViewModel == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(carViewModel);
+        }
     }
 }

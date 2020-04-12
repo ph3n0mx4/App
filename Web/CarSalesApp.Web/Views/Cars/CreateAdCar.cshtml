@@ -24,7 +24,6 @@
                 <option>--Select Make--</option>
             </select>
         </div>
-        @*</div>*@
         <div class="col-md-4">
             <label asp-for="ModelId">Model </label>
             <select asp-for="ModelId" id="modelId" class="selectpicker form-control btn btn-secondary dropdown-toggle">
@@ -80,15 +79,15 @@
     </div>
 </form>
 
-<div class="ui-filter-slider">
+<!--<div class="ui-filter-slider">
     <div class="sidebar-widget-body m-t-10">
         <div class="price-range-holder">
             <span class="min-max"> <span class="pull-left">$200.00</span> <span class="pull-right">$800.00</span> </span>
             <input type="range" class="price-slider" value="" style="display:block">
         </div>
-        <!-- /.price-range-holder -->
+        <!-- /.price-range-holder --
     </div>
-</div>
+</div>-->
 
 
 @*<form method="post" enctype="multipart/form-data" asp-controller="Cars" asp-action="Upload">
@@ -116,20 +115,20 @@
             });
         });
 
-        $("#fuelList").change(function () {
-            var fuelId = $("#fuelList").val();
-            var modelId = $("#modelId").val();
-            var url = "/api/data/getDrives";
+            $("#fuelList").change(function () {
+                var fuelId = $("#fuelList").val();
+                var modelId = $("#modelId").val();
+                var url = "/api/data/getDrives";
 
-            $.getJSON(url, { modelId: modelId, fuelId: fuelId }, function (data) {
-                var item = "";
-                $("#driveId").empty();
-                $.each(data, function (i, drive) {
-                    item += '<option value="' + drive.value + '">' + drive.text + '</option>'
+                $.getJSON(url, { modelId: modelId, fuelId: fuelId }, function (data) {
+                    var item = "";
+                    $("#driveId").empty();
+                    $.each(data, function (i, drive) {
+                        item += '<option value="' + drive.value + '">' + drive.text + '</option>'
+                    });
+                    $("#driveId").html(item);
                 });
-                $("#driveId").html(item);
             });
-        });
 
     </script>
 }
