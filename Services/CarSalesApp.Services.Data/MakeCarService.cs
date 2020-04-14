@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CarSalesApp.Services.Data
 {
@@ -17,16 +18,50 @@ namespace CarSalesApp.Services.Data
             this.makeRepository = makeRepository;
         }
 
-        public IEnumerable<T> GetAll<T>(int? id = null)
+        public async Task<int> AddAsync(string name)
+        {
+            var make = new Make
+            {
+                Name = name,
+            };
+
+            await this.makeRepository.AddAsync(make);
+            await this.makeRepository.SaveChangesAsync();
+            return make.Id;
+        }
+
+        public IEnumerable<T> GetAll<T>()
         {
             IQueryable<Make> query = this.makeRepository.All();
-
-            if (id.HasValue)
-            {
-                query = query.Where(x => x.Id == id.Value);
-            }
-
             return query.To<T>().ToList();
+        }
+
+        public T GetByName<T>(string name)
+        {
+            var make = this.makeRepository.All()
+                .Where(x => x.Name.ToLower() == name.ToLower())
+                .To<T>().FirstOrDefault();
+            return make;
+        }
+
+        public bool IsHasMakeId(int makeId)
+        {
+            var currentMake = this.makeRepository.All()
+                .Where(x => x.Id == makeId)
+                .Select(x => x.Id)
+                .FirstOrDefault();
+
+            return currentMake == makeId;
+        }
+
+        public bool IsHasMakeName(string makeName)
+        {
+            var currentMake = this.makeRepository.All()
+                .Where(x => x.Name == makeName)
+                .Select(x => x.Name)
+                .FirstOrDefault();
+
+            return currentMake == makeName;
         }
     }
 }

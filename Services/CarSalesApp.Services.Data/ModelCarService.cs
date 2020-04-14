@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CarSalesApp.Services.Data
 {
@@ -21,6 +22,36 @@ namespace CarSalesApp.Services.Data
         {
             IQueryable query = this.modelRepository.All();
             return query.To<T>().ToList();
+        }
+
+        public async Task AddAsync(string name, int makeId)
+        {
+            var model = new Model()
+            {
+                Name = name,
+                MakeId = makeId,
+            };
+
+            await this.modelRepository.AddAsync(model);
+            await this.modelRepository.SaveChangesAsync();
+        }
+
+        public T GetByName<T>(string name)
+        {
+            var model = this.modelRepository.All()
+                .Where(x => x.Name.ToLower() == name.ToLower())
+                .To<T>().FirstOrDefault();
+            return model;
+        }
+
+        public bool IsHasModelName(string modelName)
+        {
+            var currentMake = this.modelRepository.All()
+                .Where(x => x.Name == modelName)
+                .Select(x => x.Name)
+                .FirstOrDefault();
+
+            return currentMake == modelName;
         }
     }
 }

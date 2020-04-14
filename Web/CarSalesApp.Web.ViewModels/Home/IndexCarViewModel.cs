@@ -7,6 +7,8 @@ namespace CarSalesApp.Web.ViewModels.Home
 {
     public class IndexCarViewModel : IHaveCustomMappings
     {
+        public int Id { get; set; }
+
         public string Title { get; set; } //make+model
 
         public string GeneralImg { get; set; }

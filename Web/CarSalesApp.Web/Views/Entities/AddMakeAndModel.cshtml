@@ -1,51 +1,39 @@
 ﻿@model CarSalesApp.Web.ViewModels.Entites.AddMakeAndModelViewModel
 @{
     ViewData["Title"] = "AddMakeAndModel";
-    var makes = Model.Makes.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
-    //var bodies = Model.Bodies.Select(x => new SelectListItem(x.Title, x.Id.ToString()));
-
-
-
+    var makes = Model.Makes;
+    var makesList = makes.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
 }
+
 <div align="center">
     <h1 id="d">Add make and/or model</h1>
     <br />
-
 </div>
 
-<form id="az">
-    <button type="submit" class="btn btn-primary">Privacy</button>
-</form>
 
-<form class="form-group " align="center" style="" asp-controller="Entities" asp-action="AddMakeAndModel" method="post">
-    <div class="col-md-6 col-md-offset-3">
+<form class="form-group col-md-6 col-md-offset-3" align="center" asp-controller="Entities" asp-action="AddMakeAndModel" method="post">
+    <div class="">
         <div>
-            <label asp-for="MakeId">Makes</label>
-            <select asp-for="MakeId" asp-items="@makes" id="makeList" class="form-control btn btn-secondary dropdown-toggle">
-                <option>--Select Make--</option>
-            </select>
-        </div>
-        @*<div>
             <label>Makes</label>
-            <select id="makeList" class="form-control btn btn-secondary dropdown-toggle">
+            <select asp-items="makesList" id="makeList" class="form-control btn btn-secondary dropdown-toggle">
                 <option>--Select Make--</option>
-                <option>--Select Make2--</option>
-                <option>--Select Make3--</option>
-                <option>Other</option>
             </select>
-        </div>*@
-
-
-        <div id="makeName" hidden>
-            <label asp-for="MakeName"></label>
-            <input asp-for="MakeName" id="makeName" class="form-control" placeholder="Enter Make"/>
-            <span asp-validation-for="MakeName" class="text-danger"></span>
+            <span asp-validation-for="Make" class="text-danger"></span>
         </div>
-
+        <div id="makeName" hidden>
+            <!--<label asp-for="MakeName"></label>-->
+            <br />
+            <input asp-for="Make" id="makeNameinput" class="form-control" placeholder="Enter New Make" />
+            <span asp-validation-for="Make" class="text-danger"></span>
+        </div>
         <div>
-            <label asp-for="ModelName"></label>
-            <input asp-for="ModelName" class="form-control" placeholder="Enter Model" />
-            <span asp-validation-for="ModelName" class="text-danger"></span>
+            <label asp-for="Model"></label>
+            <input asp-for="Model" class="form-control" placeholder="Enter Model" />
+            <span asp-validation-for="Model" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="col-md">
+            <button type="submit" class="btn btn-secondary">Add</button>
         </div>
     </div>
 </form>
@@ -68,13 +56,16 @@
         //}
         var makes = document.getElementById("makeList")
         makes.addEventListener("change", function myfunction() {
-            var x = document.getElementById("makeName");
+            var makeDiv = document.getElementById("makeName");
+            var makeinput = document.getElementById("makeNameinput");
 
             if (makes.value === "999999999") {
-                x.hidden = false;
+                makeinput.value = "";
+                makeDiv.hidden = false;
                 //x.style.display = "none";
             } else {
-                x.hidden = true;
+                makeDiv.hidden = true;
+                makeinput.value = makes.value;
                 //x.style.display = "block";
             }
         })
