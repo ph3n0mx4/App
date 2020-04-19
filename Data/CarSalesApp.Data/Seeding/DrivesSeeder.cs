@@ -18,7 +18,7 @@ namespace CarSalesApp.Data.Seeding
             }
 
             await dbContext.Drives.AddAsync(
-                new Drive { ModelId = 1, CC = 1686, Gear = 5, Power = 75, GearType = (GearType)Enum.Parse(typeof(GearType), "Manual"), Fuel = (FuelType)Enum.Parse(typeof(FuelType), "Petrol") });
+                new Drive { ModelId = 1, Displacement = 1686, Gear = 5, Power = 75, GearType = (GearType)Enum.Parse(typeof(GearType), "Manual"), Fuel = (FuelType)Enum.Parse(typeof(FuelType), "Petrol") });
         }
     }
 }

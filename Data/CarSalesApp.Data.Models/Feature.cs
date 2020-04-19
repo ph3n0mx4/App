@@ -16,7 +16,9 @@
 
         public string Name { get; set; }
 
-        public FeatureType Type { get; set; }
+        public int TypeId { get; set; }
+
+        public virtual FeatureType Type { get; set; }
 
         public ICollection<Car> Cars { get; set; }
     }

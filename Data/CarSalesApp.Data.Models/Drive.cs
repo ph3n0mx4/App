@@ -16,7 +16,7 @@
 
         public FuelType Fuel { get; set; }
 
-        public int CC { get; set; }
+        public int Displacement { get; set; }
 
         public int Power { get; set; }
 
@@ -26,7 +26,7 @@
 
         public int ModelId { get; set; }
 
-        public Model Model { get; set; }
+        public virtual Model Model { get; set; }
 
         public DateTime YearFrom { get; set; }
 

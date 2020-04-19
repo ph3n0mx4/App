@@ -1,0 +1,38 @@
+﻿@model CarSalesApp.Web.ViewModels.Administration.Entities.AddBodyViewModel
+
+@using CarSalesApp.Data.Models.Enums;
+
+<div align="center">
+    <h1>Add Body</h1>
+    <br />
+</div>
+
+<form class="form-group col-md-6 center" align="center" asp-controller="Entities" asp-action="AddBody" method="post" enctype="multipart/form-data">
+    <div>
+        <div>
+            <label asp-for="Category"></label>
+            <select asp-for="Category" asp-items="Html.GetEnumSelectList<CategoryType>()"
+                    class="form-control btn btn-secondary dropdown-toggle">
+                <option>--Select Category--</option>
+            </select>
+            <span asp-validation-for="Category" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Seats"></label>
+            <input asp-for="Seats" class="form-control" type="number" placeholder="Enter Number Of Seats" />
+            <span asp-validation-for="Seats" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Doors"></label>
+            <select asp-for="Doors" asp-items="Html.GetEnumSelectList<DoorType>()"
+                    class="form-control btn btn-secondary dropdown-toggle">
+                <option>--Select Doors--</option>
+            </select>
+            <span asp-validation-for="Doors" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="col-md">
+            <button type="submit" class="btn btn-secondary">Add</button>
+        </div>
+    </div>
+</form>

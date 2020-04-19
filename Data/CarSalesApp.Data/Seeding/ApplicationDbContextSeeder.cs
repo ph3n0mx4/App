@@ -33,6 +33,7 @@
                               new ModelsSeeder(),
                               new FeaturesSeeder(),
                               new DrivesSeeder(),
+                              new AddRoleToUserSeeder(),
                           };
 
             foreach (var seeder in seeders)

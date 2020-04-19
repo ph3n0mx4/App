@@ -1,0 +1,90 @@
+﻿@model CarSalesApp.Web.ViewModels.Administration.Entities.AddDriveViewModel
+
+@using CarSalesApp.Data.Models.Enums;
+
+@{
+    var makes = Model.Makes.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
+
+}
+
+<div align="center">
+    <h1>Add Engine</h1>
+    <br />
+</div>
+
+<form class="form-group col-md-6 center" align="center" asp-controller="Entities" asp-action="AddEngine" method="post" enctype="multipart/form-data">
+    <div>
+        <div>
+            <label >Makes</label>
+            <select asp-for="Make" asp-items="@makes" id="makeList" class="form-control btn btn-secondary dropdown-toggle" onchange="getModelForCurrentMake()">
+                <option>--Select Make--</option>
+            </select>
+            <span asp-validation-for="Make" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="ModelId">Model </label>
+            <select asp-for="ModelId" id="modelId" class="selectpicker form-control btn btn-secondary dropdown-toggle">
+                <option>--Select Model--</option>
+            </select>
+            <span asp-validation-for="ModelId" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="FuelId"></label>
+            <select asp-for="FuelId" id="fuelList" asp-items="Html.GetEnumSelectList<FuelType>()"
+                    class="form-control btn btn-secondary dropdown-toggle">
+                <option>--Select Fuel--</option>
+            </select>
+            <span asp-validation-for="FuelId" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Power"></label>
+            <input asp-for="Power" class="form-control" type="number" placeholder="Enter Power" />
+            <span asp-validation-for="Power" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Displacement"></label>
+            <input asp-for="Displacement" class="form-control" type="number" placeholder="Enter Displacement" />
+            <span asp-validation-for="Displacement" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="GearType"></label>
+            <select asp-for="GearType" id="fuelList" asp-items="Html.GetEnumSelectList<GearType>()"
+                    class="form-control btn btn-secondary dropdown-toggle">
+                <option>--Select Gear Type--</option>
+            </select>
+            <span asp-validation-for="GearType" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Gear"></label>
+            <input asp-for="Gear" class="form-control" type="number" placeholder="Enter number of gear" />
+            <span asp-validation-for="Gear" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="YearFrom"></label>
+            <select asp-for="YearFrom" id="yearselect" class="selectpicker form-control btn btn-secondary dropdown-toggle">
+                <option>--Select Year From--</option>
+                @for (int i = 1950; i <= @DateTime.Now.Year; i++)
+                {
+                    <option>@i</option>
+                }
+            </select>
+            <span asp-validation-for="YearFrom" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="YearTo"></label>
+            <select asp-for="YearTo" id="yearselect" class="selectpicker form-control btn btn-secondary dropdown-toggle">
+                <option>--Select Year From--</option>
+                @for (int i = 1950; i <= @DateTime.Now.Year; i++)
+                {
+                    <option>@i</option>
+                }
+            </select>
+            <span asp-validation-for="YearTo" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="col-md">
+            <button type="submit" class="btn btn-secondary">Add</button>
+        </div>
+    </div>
+</form>
+

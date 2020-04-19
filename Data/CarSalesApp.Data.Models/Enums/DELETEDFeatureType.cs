@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CarSalesApp.Data.Models.Enums
 {
-    public enum FeatureType
+    public enum DELETEDFeatureType
     {
         Safety = 1,
         Comfort = 2,

@@ -9,6 +9,11 @@
 
     public class Car : BaseDeletableModel<int>
     {
+        public Car()
+        {
+            this.Images = new HashSet<Image>();
+        }
+
         public string Title { get; set; }
 
         public int? MakeId { get; set; }
@@ -38,5 +43,7 @@
         public ColorType Color { get; set; }
 
         public DateTime FirstRegistration { get; set; }
+
+        public virtual ICollection<Image> Images { get; set; }
     }
 }

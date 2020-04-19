@@ -9,6 +9,7 @@
     using CarSalesApp.Data.Repositories;
     using CarSalesApp.Data.Seeding;
     using CarSalesApp.Services.Data;
+    using CarSalesApp.Services.Data.CarEntity;
     using CarSalesApp.Services.Mapping;
     using CarSalesApp.Services.Messaging;
     using CarSalesApp.Web.ViewModels;
@@ -72,6 +73,7 @@
             services.AddTransient<IModelCarService, ModelCarService>();
             services.AddTransient<IBodyCarService, BodyCarService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
+            services.AddTransient<IEngineService, EngineService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

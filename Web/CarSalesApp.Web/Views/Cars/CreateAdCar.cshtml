@@ -5,9 +5,6 @@
     ViewData["Title"] = "CreateAdCar";
     var makes = Model.Makes.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
     var bodies = Model.Bodies.Select(x => new SelectListItem(x.Title, x.Id.ToString()));
-
-
-
 }
 
 <h1>CreateAdCar</h1>
@@ -20,7 +17,7 @@
     <div class="row">
         <div class="col-md-4">
             <label asp-for="MakeId">Makes</label>
-            <select asp-for="MakeId" asp-items="@makes" id="makeList" class="form-control btn btn-secondary dropdown-toggle">
+            <select asp-for="MakeId" asp-items="@makes" id="makeList" class="form-control btn btn-secondary dropdown-toggle" onchange="getModelForCurrentMake()">
                 <option>--Select Make--</option>
             </select>
         </div>
@@ -57,7 +54,7 @@
         <div class="col-md-4">
             <label asp-for="FuelId">Fuel</label>
             <select asp-for="FuelId" id="fuelList" asp-items="Html.GetEnumSelectList<FuelType>()"
-                    class="form-control btn btn-secondary dropdown-toggle">
+                    class="form-control btn btn-secondary dropdown-toggle" onchange="getDrivesForCurrentFuel()">
                 <option>--Select Fuel--</option>
             </select>
         </div>
@@ -71,68 +68,9 @@
             <label asp-for="Files">Files</label>
             <input asp-for="Files" type="file" class="btn btn-secondary @*toggle*@" name="Files" multiple>
         </div>
-
-
         <div class="col-md">
             <button type="submit" class="btn btn-secondary">Add</button>
         </div>
     </div>
 </form>
-
-<!--<div class="ui-filter-slider">
-    <div class="sidebar-widget-body m-t-10">
-        <div class="price-range-holder">
-            <span class="min-max"> <span class="pull-left">$200.00</span> <span class="pull-right">$800.00</span> </span>
-            <input type="range" class="price-slider" value="" style="display:block">
-        </div>
-        <!-- /.price-range-holder --
-    </div>
-</div>-->
-
-
-@*<form method="post" enctype="multipart/form-data" asp-controller="Cars" asp-action="Upload">
-        <input type="file" name="files" multiple>
-        <input type="submit" class="btn" value="Upload">/>
-    </form>*@
-
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
-    <script type="text/javascript">
-
-        $("#makeList").change(function () {
-            var makeId = $("#makeList").val();
-            var url = "/api/data/getModels";
-
-            $.getJSON(url, { makeId: makeId }, function (data) {
-                var item = "";
-                $("#modelId").empty();
-                $.each(data, function (i, model) {
-                    item += '<option value="' + model.value + '">' + model.text + '</option>'
-                });
-                $("#modelId").html(item);
-            });
-        });
-
-            $("#fuelList").change(function () {
-                var fuelId = $("#fuelList").val();
-                var modelId = $("#modelId").val();
-                var url = "/api/data/getDrives";
-
-                $.getJSON(url, { modelId: modelId, fuelId: fuelId }, function (data) {
-                    var item = "";
-                    $("#driveId").empty();
-                    $.each(data, function (i, drive) {
-                        item += '<option value="' + drive.value + '">' + drive.text + '</option>'
-                    });
-                    $("#driveId").html(item);
-                });
-            });
-
-    </script>
-}
-
-
-
 

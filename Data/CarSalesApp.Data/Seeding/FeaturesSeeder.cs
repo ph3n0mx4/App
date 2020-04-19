@@ -18,8 +18,8 @@ namespace CarSalesApp.Data.Seeding
             }
 
             await dbContext.Features.AddRangeAsync(
-                new Feature { Name = "Air conditioning", Type = (FeatureType)Enum.Parse(typeof(FeatureType), "Comfort") },
-                new Feature { Name = "ABS", Type = (FeatureType)Enum.Parse(typeof(FeatureType), "Safety") });
+                new Feature { Name = "Air conditioning", TypeId = 21 },
+                new Feature { Name = "ABS", TypeId = 16 });
         }
     }
 }

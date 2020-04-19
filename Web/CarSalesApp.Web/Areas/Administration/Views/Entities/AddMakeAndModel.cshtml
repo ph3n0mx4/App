@@ -1,0 +1,38 @@
+﻿@model CarSalesApp.Web.ViewModels.Administration.Entities.AddMakeAndModelViewModel
+@{
+    ViewData["Title"] = "AddMakeAndModel";
+    var makes = Model.Makes;
+    var makesList = makes.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
+}
+
+<div align="center">
+    <h1 id="d">Add make and/or model</h1>
+    <br />
+</div>
+
+
+<form class="form-group col-md-6 center" align="center" asp-controller="Entities" asp-action="AddMakeAndModel" method="post">
+    <div>
+        <label>Makes</label>
+        <select asp-items="makesList" id="makeList" class="form-control btn btn-secondary dropdown-toggle" onchange="showMakeInput()">
+            <option>--Select Make--</option>
+        </select>
+        <span asp-validation-for="Make" class="text-danger"></span>
+    </div>
+    <div id="makeName" hidden>
+        <!--<label asp-for="MakeName"></label>-->
+        <br />
+        <input asp-for="Make" id="makeNameinput" class="form-control" placeholder="Enter New Make" />
+        <span asp-validation-for="Make" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Model"></label>
+        <input asp-for="Model" class="form-control" placeholder="Enter Model" />
+        <span asp-validation-for="Model" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="col-md">
+        <button type="submit" class="btn btn-secondary">Add</button>
+    </div>
+</form>
+
