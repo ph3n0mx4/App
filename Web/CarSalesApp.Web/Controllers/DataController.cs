@@ -28,7 +28,7 @@ namespace CarSalesApp.Web.Controllers
         [HttpGet("getModels")]
         public ActionResult<SelectList> GetModels(int makeId)
         {
-            var models = new SelectList(this.db.Models.Where(c => c.MakeId == makeId).ToList(), "Id", "Name");
+            var models = new SelectList(this.db.Models.Where(c => c.MakeId == makeId).OrderBy(m => m.Name).ToList(), "Id", "Name");
 
             return models;
         }

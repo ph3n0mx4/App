@@ -4,15 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CarSalesApp.Web.ViewModels.Cars
+namespace CarSalesApp.Web.ViewModels.Administration.Makes
 {
-    public class ModelInputViewModel : IMapFrom<Model>
+    public class EditMakeAndModelViewModel : IMapFrom<Model>
     {
-        public string Name { get; set; }
-
         public int Id { get; set; }
 
-        public int ModelId { get; set; }
+        public string Name { get; set; }
+
+        public int MakeId { get; set; }
 
         public virtual Make Make { get; set; }
     }

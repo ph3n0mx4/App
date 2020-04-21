@@ -11,6 +11,8 @@ namespace CarSalesApp.Services.Data
 
         T GetByName<T>(string name);
 
+        T GetById<T>(int id);
+
         Task AddAsync(string name, int makeId);
 
         bool IsHasModelName(string modelName);

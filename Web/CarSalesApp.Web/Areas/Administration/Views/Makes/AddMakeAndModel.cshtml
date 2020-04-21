@@ -1,8 +1,8 @@
-﻿@model CarSalesApp.Web.ViewModels.Administration.Entities.AddMakeAndModelViewModel
+﻿@model CarSalesApp.Web.ViewModels.Administration.Makes.AddMakeAndModelViewModel
 @{
     ViewData["Title"] = "AddMakeAndModel";
-    var makes = Model.Makes;
-    var makesList = makes.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
+    //var makes = Model.Makes;
+    var makesList = Model.Makes.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
 }
 
 <div align="center">
@@ -11,7 +11,7 @@
 </div>
 
 
-<form class="form-group col-md-6 center" align="center" asp-controller="Entities" asp-action="AddMakeAndModel" method="post">
+<form class="form-group col-md-6 center" align="center" asp-controller="Makes" asp-action="AddMakeAndModel" method="post">
     <div>
         <label>Makes</label>
         <select asp-items="makesList" id="makeList" class="form-control btn btn-secondary dropdown-toggle" onchange="showMakeInput()">

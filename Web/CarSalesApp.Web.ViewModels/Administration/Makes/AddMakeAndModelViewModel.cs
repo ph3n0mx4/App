@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace CarSalesApp.Web.ViewModels.Administration.Entities
+namespace CarSalesApp.Web.ViewModels.Administration.Makes
 {
     public class AddMakeAndModelViewModel : IMapFrom<Make>
     {

@@ -1,0 +1,49 @@
+﻿@model CarSalesApp.Web.ViewModels.Administration.Makes.DetailsMakesViewModel
+
+@{
+    ViewData["Title"] = "CreateAdCar";
+    var makes = Model.Makes.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <label>Makes</label>
+        <select asp-items="@makes" id="makeList" class="form-control btn btn-secondary dropdown-toggle" onchange="getModelForCurrentMake1()">
+            <option>--Select Make--</option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label>Models</label>
+        <p style="color: lightslategrey; font-size:12.5px"> (Click on a model for edit)</p>
+        <div type="disk" asp-for="ModelId" id="modelId">
+        </div>
+        <!--<label asp-for="ModelId">Model </label>
+    <select asp-for="ModelId" id="modelId" class="selectpicker form-control btn btn-secondary dropdown-toggle">
+        <option>--Select Model--</option>
+    </select-->
+    </div>
+    <div class="col-md-4">
+        <a class="btn btn-secondary" href="#" role="button">Save Changes</a>
+        <a class="btn btn-secondary" href="#" role="button">Back</a>
+        
+    </div>
+    </div>
+        <a href="/Makes/Edit/model.value"></a>
+    <script>
+        function getModelForCurrentMake1() {
+            var makeId = $("#makeList").val();
+            var url = "/api/data/getModels";
+
+            $.getJSON(url, { makeId: makeId }, function (data) {
+                var item = "";
+                $("#modelId").empty();
+                $.each(data, function (i, model) {
+                    //<li>Gadgets</li>
+                    //<input asp-for="Model" class="form-control" placeholder="Enter Model" />
+                    item += '<li style="color:;font-size:17.5px" value="' + model.value + '"><a href="/Administration/Makes/Edit/' + model.value + '">' + model.text + '</a></li>'
+                    //item += '<input class="form-control" value="' + model.text + '"disabled /> <br />'
+                });
+                $("#modelId").html(item);
+            });
+        }
+    </script>

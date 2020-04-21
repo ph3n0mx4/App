@@ -1,0 +1,35 @@
+﻿@model CarSalesApp.Web.ViewModels.Administration.Makes.EditMakeAndModelViewModel
+@{
+    ViewData["Title"] = "AddMakeAndModel";
+    //var makes = Model.Makes;
+    //var makesList = Model.Makes.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
+}
+
+<div align="center">
+    <h1>Edit make and/or model</h1>
+    <br />
+</div>
+
+
+<form class="form-group col-md-6 center" align="center" asp-controller="Makes" asp-action="AddMakeAndModel" method="post">
+    <div id="makeName">
+        <label asp-for="Make"></label>
+        <input asp-for="Make.Name" id="makeNameinput" class="form-control" placeholder="Enter New Make" />
+        <span asp-validation-for="Make" class="text-danger"></span>
+    </div>
+    <br />
+    <div>
+        <label>Model</label>
+        <input asp-for="Name" class="form-control" placeholder="Enter Model" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="col-md" hidden>
+        <a class="btn btn-secondary" href="#" role="button">Save Changes</a>
+        <a class="btn btn-secondary" href="#" role="button">Back</a>
+
+    </div>
+    <div class="col-md">
+        <button type="submit" class="btn btn-secondary" hidden>Save</button>
+    </div>
+</form>

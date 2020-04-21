@@ -1,0 +1,54 @@
+﻿@model CarSalesApp.Web.ViewModels.Administration.Entities.AddFeatureViewModel
+
+@{ 
+    var types = Model.Types.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
+}
+<div align="center">
+    <h1>Add Feature</h1>
+    <br />
+</div>
+
+<form class="form-group col-md-6 center" align="center" asp-controller="Entities" asp-action="AddFeature" method="post">
+        <div>
+            <label asp-for="Type"></label>
+            <select asp-items="types" id="types" class="form-control btn btn-outline-dark dropdown-toggle" onchange="showFeatureTypeInput()">-outline-info
+                <option>--Select Make--</option>
+            </select>
+            <span asp-validation-for="Type" class="text-danger"></span>
+        </div>
+        <div id="divType" hidden>
+            <label asp-for="Type"></label>
+            <br />
+            <input asp-for="Type" id="typeInput" class="form-control" placeholder="Enter New Type Of Features" />
+            <span asp-validation-for="Type" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Feature"></label>
+            <input asp-for="Feature" class="form-control" placeholder="Enter Model" />
+            <span asp-validation-for="Feature" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="col-md">
+            <button type="submit" class="btn btn-secondary">Add</button>
+        </div>
+</form>
+
+@*<script>
+    function showFeatureTypeInput() {
+        var types = document.getElementById("types")
+        types.addEventListener("change", function myfunction() {
+            var typeDiv = document.getElementById("divType");
+            var typeInput = document.getElementById("typeInput");
+
+            if (types.value === "999999999") {
+                typeInput.value = "";
+                typeDiv.hidden = false;
+                //x.style.display = "none";
+            } else {
+                typeDiv.hidden = true;
+                typeInput.value = types.value;
+                //x.style.display = "block";
+            }
+        });
+    }
+</script>*@

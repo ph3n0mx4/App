@@ -74,6 +74,8 @@
             services.AddTransient<IBodyCarService, BodyCarService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IEngineService, EngineService>();
+            services.AddTransient<IFeatureTypeService, FeatureTypeService>();
+            services.AddTransient<IFeatureService, FeatureService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

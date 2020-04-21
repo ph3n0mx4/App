@@ -44,6 +44,14 @@ namespace CarSalesApp.Services.Data
             return model;
         }
 
+        public T GetById<T>(int id)
+        {
+            var model = this.modelRepository.All()
+                .Where(x => x.Id == id)
+                .To<T>().FirstOrDefault();
+            return model;
+        }
+
         public bool IsHasModelName(string modelName)
         {
             var currentMake = this.modelRepository.All()
