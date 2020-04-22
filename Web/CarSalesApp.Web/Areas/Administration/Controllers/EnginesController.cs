@@ -1,5 +1,6 @@
 ﻿using CarSalesApp.Services.Data;
 using CarSalesApp.Services.Data.CarEntity;
+using CarSalesApp.Web.ViewModels.Administration.Engines;
 using CarSalesApp.Web.ViewModels.Administration.Entities;
 using CarSalesApp.Web.ViewModels.Cars;
 using Microsoft.AspNetCore.Mvc;
@@ -40,6 +41,16 @@ namespace CarSalesApp.Web.Areas.Administration.Controllers
             await this.engineService.AddAsync(input.ModelId, input.FuelId, input.Displacement, input.Power, input.GearType, input.Gear, input.YearFrom, input.YearTo);
 
             return this.Redirect("/");
+        }
+
+        public IActionResult All()
+        {
+            var viewModel = new AllEngineViewModel
+            {
+                Makes = this.makeCarService.GetAll<MakeInputViewModel>(),
+            };
+
+            return this.View(viewModel);
         }
     }
 }

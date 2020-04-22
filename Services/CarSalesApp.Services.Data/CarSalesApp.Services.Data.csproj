@@ -27,6 +27,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\CarSalesApp.Data.Common\CarSalesApp.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\CarSalesApp.Data.Models\CarSalesApp.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\CarSalesApp.Web.ViewModels\CarSalesApp.Web.ViewModels.csproj" />
     <ProjectReference Include="..\CarSalesApp.Services.Mapping\CarSalesApp.Services.Mapping.csproj" />
   </ItemGroup>
 

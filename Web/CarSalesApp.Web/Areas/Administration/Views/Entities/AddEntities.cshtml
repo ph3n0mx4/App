@@ -11,18 +11,23 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-3" align="center">
-            <h3><a asp-action="AddEngine">Engine</a></h3>
-            <a asp-controller="Engines" asp-action="AddEngine"><img src="~/images/Engine.jpg" width="200" alt="Engine" /></a>
+            <div>
+                <h3>Engine</h3>
+                <a asp-controller="Engines" asp-action="All"><img src="~/images/Engine.jpg" width="200" alt="Engine" /></a>
+            </div>
+            <div>
+                <h5><a asp-controller="Engines" asp-action="AddEngine">Add</a></h5>
+                <h5><a asp-controller="Engines" asp-action="All">All</a></h5>
+            </div>
         </div>
         <div class="col-md-3" align="center">
             <div>
                 <h3>Make and model</h3>
-                <a asp-controller="Makes" asp-action="AddMakeAndModel"><img src="~/images/Makes.jpg" width="200" alt="Make" /></a>
+                <a asp-controller="Makes" asp-action="All"><img src="~/images/Makes.jpg" width="200" alt="Make" /></a>
             </div>
             <div>
                 <h5><a asp-controller="Makes" asp-action="AddMakeAndModel">Add</a></h5>
-                <h5><a asp-controller="Makes" asp-action="Details">Details</a></h5>
-                <h5><a asp-controller="Makes" asp-action="AddMakeAndModel">Edit</a></h5>
+                <h5><a asp-controller="Makes" asp-action="All">All</a></h5>
             </div>
         </div>
         <div class="col-md-3" align="center">

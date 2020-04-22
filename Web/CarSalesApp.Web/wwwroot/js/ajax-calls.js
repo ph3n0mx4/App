@@ -12,7 +12,7 @@
     });
 }
 
-function getDrivesForCurrentFuel() {
+function getDrivesWithCurrentFuelForAdCar() {
     var fuelId = $("#fuelList").val();
     var modelId = $("#modelId").val();
     var url = "/api/data/getDrives";
@@ -60,4 +60,21 @@ function showFeatureTypeInput() {
         typeInput.value = types.value;
         //x.style.display = "block";
     }
+}
+
+function getModelForCurrentMakeInDetails() {
+    var makeId = $("#makeList").val();
+    var url = "/api/data/getModels";
+
+    $.getJSON(url, { makeId: makeId }, function (data) {
+        var item = "";
+        $("#modelId").empty();
+        $.each(data, function (i, model) {
+            //<li>Gadgets</li>
+            //<input asp-for="Model" class="form-control" placeholder="Enter Model" />
+            item += '<li style="color:;font-size:17.5px" value="' + model.value + '"><a href="/Administration/Makes/Edit/' + model.value + '">' + model.text + '</a></li>'
+            //item += '<input class="form-control" value="' + model.text + '"disabled /> <br />'
+        });
+        $("#modelId").html(item);
+    });
 }

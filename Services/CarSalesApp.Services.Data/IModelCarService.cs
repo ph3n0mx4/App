@@ -13,8 +13,10 @@ namespace CarSalesApp.Services.Data
 
         T GetById<T>(int id);
 
-        Task AddAsync(string name, int makeId);
+        Task<int> AddAsync(string name, int makeId);
 
         bool IsHasModelName(string modelName);
+
+        Task<int> EditAsync(int id, string name, string makeName);
     }
 }

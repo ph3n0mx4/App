@@ -1,0 +1,22 @@
+﻿@model CarSalesApp.Web.ViewModels.Administration.Makes.AllMakesViewModel
+
+@{
+    ViewData["Title"] = "All makes and models";
+    var makes = Model.Makes.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <label>Makes</label>
+        <select asp-items="@makes" id="makeList" class="form-control btn btn-secondary dropdown-toggle" onchange="getModelForCurrentMakeInDetails()">
+            <option>--Select Make--</option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label>Models</label>
+        <p style="color: lightslategrey; font-size:12.5px"> (Click on model for edit)</p>
+        <div type="disk" asp-for="ModelId" id="modelId">
+        </div>
+    </div>
+</div>
+

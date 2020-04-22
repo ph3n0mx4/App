@@ -63,5 +63,14 @@ namespace CarSalesApp.Services.Data
 
             return currentMake == makeName;
         }
+
+        public T GetById<T>(int id)
+        {
+            var make = this.makeRepository.All()
+                .Where(x => x.Id == id)
+                .To<T>()
+                .FirstOrDefault();
+            return make;
+        }
     }
 }

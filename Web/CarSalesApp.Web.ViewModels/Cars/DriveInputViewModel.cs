@@ -14,7 +14,7 @@ namespace CarSalesApp.Web.ViewModels.Cars
     {
         public int Id { get; set; }
 
-        public int CC { get; set; }
+        public int Displacement { get; set; }
 
         public int Power { get; set; }
 
@@ -22,7 +22,7 @@ namespace CarSalesApp.Web.ViewModels.Cars
 
         public int Gear { get; set; }
 
-        public string Title => this.CC + "cc, " + this.Power + "hp, " + this.GearType.AsString(EnumFormat.Description) + " (" + this.Gear + ")";
+        public string Title => this.Displacement + "cc, " + this.Power + "hp, " + this.GearType.ToString() + " (" + this.Gear + ")";
 
         //public void CreateMappings(IProfileExpression configuration)
         //{

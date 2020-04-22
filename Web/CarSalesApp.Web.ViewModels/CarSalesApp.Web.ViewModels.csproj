@@ -25,4 +25,9 @@
     <ProjectReference Include="..\..\Services\CarSalesApp.Services.Mapping\CarSalesApp.Services.Mapping.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Administration\Features\" />
+    <Folder Include="Administration\Bodies\" />
+  </ItemGroup>
+
 </Project>

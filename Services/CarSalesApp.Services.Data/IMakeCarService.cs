@@ -16,5 +16,7 @@ namespace CarSalesApp.Services.Data
         bool IsHasMakeId(int makeId);
 
         bool IsHasMakeName(string makeName);
+
+        T GetById<T>(int id);
     }
 }

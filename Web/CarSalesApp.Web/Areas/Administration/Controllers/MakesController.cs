@@ -20,9 +20,9 @@ namespace CarSalesApp.Web.Areas.Administration.Controllers
             this.modelCarService = modelCarService;
         }
 
-        public IActionResult Details()
+        public IActionResult All()
         {
-            var viewModel = new DetailsMakesViewModel
+            var viewModel = new AllMakesViewModel
             {
                 Makes = this.makeCarService.GetAll<MakeInputViewModel>(),
             };
@@ -30,23 +30,55 @@ namespace CarSalesApp.Web.Areas.Administration.Controllers
             return this.View(viewModel);
         }
 
-        public IActionResult Edit(int Id)
+        public IActionResult Edit(int id)
         {
-            var model = this.modelCarService.GetById<ModelInputViewModel>(Id);
+            var model = this.modelCarService.GetById<ModelInputViewModel>(id);
 
             if (model == null)
             {
                 return this.NotFound();
             }
 
-            var viewModel = new EditMakeAndModelViewModel
+            var viewModel = new EditModelViewModel
             {
                 Id = model.Id,
-                Make = model.Make,
                 Name = model.Name,
+                MakeName = model.Make.Name,
             };
 
             return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditModelViewModel input)
+        {
+            var model = this.modelCarService.GetById<ModelInputViewModel>(input.Id);
+
+            if (model == null)
+            {
+                return this.NotFound();
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                var viewModel = new EditModelViewModel
+                {
+                    Id = model.Id,
+                    Name = model.Name,
+                    MakeName = model.Make.Name,
+                };
+                return this.View(viewModel);
+            }
+
+            await this.modelCarService.EditAsync(input.Id, input.Name, input.MakeName);
+
+            return this.RedirectToAction(nameof(this.Details), "Makes", new { Id = model.Make.Id });
+        }
+
+        public IActionResult Details(int id)
+        {
+            var modelView = this.makeCarService.GetById<DetailsMakesViewModel>(id);
+            return this.View(modelView);
         }
 
         public IActionResult AddMakeAndModel()
@@ -86,15 +118,16 @@ namespace CarSalesApp.Web.Areas.Administration.Controllers
                 {
                     var make = this.makeCarService.GetByName<MakeInputViewModel>(inputMakeName);
                     await this.modelCarService.AddAsync(inputModelName, make.Id);
+                    makeId = make.Id;
                 }
                 else
                 {
-                    var newMakeId = await this.makeCarService.AddAsync(inputMakeName);
-                    await this.modelCarService.AddAsync(inputModelName, newMakeId);
+                    makeId = await this.makeCarService.AddAsync(inputMakeName);
+                    await this.modelCarService.AddAsync(inputModelName, makeId);
                 }
             }
 
-            return this.Redirect("/"); //<<< tuk MUST da se redirekne kym view s markite i modelite kym markata edit delete
+            return this.RedirectToAction(nameof(this.Details), "Makes", new { Id = makeId });
         }
     }
 }

@@ -2,18 +2,20 @@
 using CarSalesApp.Services.Mapping;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace CarSalesApp.Web.ViewModels.Administration.Makes
 {
-    public class EditMakeAndModelViewModel : IMapFrom<Model>
+    public class EditModelViewModel : IMapFrom<Model>
     {
+        [Required]
         public int Id { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
-        public int MakeId { get; set; }
-
-        public virtual Make Make { get; set; }
+        [Required]
+        public string MakeName { get; set; }
     }
 }

@@ -54,7 +54,7 @@
         <div class="col-md-4">
             <label asp-for="FuelId">Fuel</label>
             <select asp-for="FuelId" id="fuelList" asp-items="Html.GetEnumSelectList<FuelType>()"
-                    class="form-control btn btn-secondary dropdown-toggle" onchange="getDrivesForCurrentFuel()">
+                    class="form-control btn btn-secondary dropdown-toggle" onchange="getDrivesWithCurrentFuelForAdCar()">
                 <option>--Select Fuel--</option>
             </select>
         </div>
