@@ -27,29 +27,10 @@
             </select>
         </div>
     </div>
-    <div class="col-md-4">
-        <label>Drives</label>
+    <div class="col-md-6">
+        <label>Engine</label>
         <p style="color: lightslategrey; font-size:12.5px"> (Click on model for edit)</p>
         <div type="disk" asp-for="DrivelId" id="driveId">
         </div> 
     </div>
 </div>
-
-<script>
-    function getDrivesWithCurrentFuelForAllEngines() {
-        $("#driveId").html("hahahah");
-        var fuelId = $("#fuelList").val();
-        var modelId = $("#modelId").val();
-        var url = "/api/data/getDrives";
-
-        $.getJSON(url, { modelId: modelId, fuelId: fuelId }, function (data) {
-            var item = "";
-            $("#driveId").empty();
-            $.each(data, function (i, drive) {
-                item += '<li style="color:;font-size:17.5px" value="' + drive.value + '"><a href="/Administration/Engines/Edit/' + drive.value + '">' + drive.text + '</a></li>'
-                //item += '<option value="' + drive.value + '">' + drive.text + '</option>'
-            });
-            $("#driveId").html(item);
-        });
-    }
-</script>

@@ -77,7 +77,7 @@ namespace CarSalesApp.Web.Areas.Administration.Controllers
 
         public IActionResult Details(int id)
         {
-            var modelView = this.makeCarService.GetById<DetailsMakesViewModel>(id);
+            var modelView = this.makeCarService.GetById<DetailsMakeViewModel>(id);
             return this.View(modelView);
         }
 

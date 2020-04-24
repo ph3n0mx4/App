@@ -6,9 +6,12 @@ using System.Text;
 
 namespace CarSalesApp.Web.ViewModels.Cars
 {
-    public class CarAdViewModel : IMapFrom<Car>
+    public class ImageCarViewModel : IMapFrom<Image>
     {
-        public string GeneralImg { get; set; }
-        //hp to kW -> hp/1.36=kW
+        public string Url { get; set; }
+
+        public int CarId { get; set; }
+
+        public virtual Car Car { get; set; }
     }
 }

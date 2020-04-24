@@ -11,6 +11,8 @@ using CarSalesApp.Services.Mapping;
 using CarSalesApp.Services.Data;
 using CloudinaryDotNet;
 using Microsoft.AspNetCore.Http;
+using CarSalesApp.Services.Data.CarEntity;
+using CarSalesApp.Common;
 
 namespace CarSalesApp.Web.Controllers
 {
@@ -23,8 +25,9 @@ namespace CarSalesApp.Web.Controllers
         private readonly ApplicationDbContext db;
         private readonly Cloudinary cloudinary;
         private readonly ICloudinaryService cloudinaryService;
+        private readonly IFeatureService featureService;
 
-        public CarsController(/*ICarService carService, */IModelCarService modelCarService, IMakeCarService makeCarService, IBodyCarService bodyCarService, ApplicationDbContext db, Cloudinary cloudinary, ICloudinaryService cloudinaryService)
+        public CarsController(/*ICarService carService, */IModelCarService modelCarService, IMakeCarService makeCarService, IBodyCarService bodyCarService, ApplicationDbContext db, Cloudinary cloudinary, ICloudinaryService cloudinaryService, IFeatureService featureService)
         {
             //this.carService = carService;
             this.modelCarService = modelCarService;
@@ -33,6 +36,7 @@ namespace CarSalesApp.Web.Controllers
             this.db = db;
             this.cloudinary = cloudinary;
             this.cloudinaryService = cloudinaryService;
+            this.featureService = featureService;
         }
 
         public IActionResult CreateAdCar()
@@ -74,10 +78,10 @@ namespace CarSalesApp.Web.Controllers
             return this.Redirect("/");
         }
 
-        public IActionResult DetailsAdCar(int id)
+        public async Task<IActionResult> DetailsAdCar(int id)
         {
-            var carViewModel = this.db.Cars.Where(x => x.Id == id).To<CarAdViewModel>().FirstOrDefault();
-
+            var carViewModel = this.db.Cars.Where(x => x.Id == id).To<CarAdDetailsViewModel>().FirstOrDefault();
+            var safety = await this.featureService.GetAllOfTypeAsync<FeatureViewModel>(GlobalConstants.featureTypeNameSafety);
             if (carViewModel == null)
             {
                 return this.NotFound();

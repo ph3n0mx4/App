@@ -59,3 +59,31 @@ body {
     margin: auto;
 }
 
+.divTable {
+    display: table;
+    width: auto;
+    background-color:;
+    border:;
+    border-spacing: 5px; /*cellspacing:poor IE support for  this*/
+    /* border-collapse:separate;*/
+}
+
+.divRow {
+    display: table-row;
+    width: auto;
+}
+
+.divCellLeft {
+    float: left; /*fix for  buggy browsers*/
+    display: table-column;
+    width: 200px;
+    background-color: ;
+}
+
+.divCellRight {
+    float: right; /*fix for  buggy browsers*/
+    display: table-column;
+    width: 200px;
+    background-color:;
+}
+

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace CarSalesApp.Web.ViewModels.Administration.Makes
 {
-    public class DetailsMakesViewModel : IMapFrom<Make>
+    public class DetailsMakeViewModel : IMapFrom<Make>
     {
         public int Id { get; set; }
 

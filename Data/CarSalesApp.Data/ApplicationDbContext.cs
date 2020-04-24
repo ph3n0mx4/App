@@ -42,6 +42,8 @@
 
         public DbSet<FeatureType> FeatureTypes { get; set; }
 
+        public DbSet<CarFeature> CarsFeatures { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -88,6 +90,11 @@
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
+            builder.Entity<CarFeature>(e =>
+            {
+                e.HasKey(x => new { x.CarId, x.FeatureId });
+            });
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)

@@ -11,6 +11,6 @@ namespace CarSalesApp.Data.Models
 
         public int CarId { get; set; }
 
-        public virtual Car Car{ get; set; }
+        public virtual Car Car { get; set; }
     }
 }

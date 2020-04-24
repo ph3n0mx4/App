@@ -22,7 +22,11 @@ namespace CarSalesApp.Web.ViewModels.Cars
 
         public int Gear { get; set; }
 
-        public string Title => this.Displacement + "cc, " + this.Power + "hp, " + this.GearType.ToString() + " (" + this.Gear + ")";
+        public DateTime YearFrom { get; set; }
+
+        public DateTime YearTo { get; set; }
+
+        public string Title => this.Displacement + "cc, " + this.Power + "hp, " + this.GearType.ToString() + ", " + this.Gear + " gears, " + this.YearFrom.Year + "-" + this.YearTo.Year;
 
         //public void CreateMappings(IProfileExpression configuration)
         //{

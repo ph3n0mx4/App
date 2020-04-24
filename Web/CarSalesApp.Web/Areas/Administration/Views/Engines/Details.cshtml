@@ -1,0 +1,55 @@
+﻿@model CarSalesApp.Web.ViewModels.Administration.Engines.DetailsEngineViewModel
+@using CarSalesApp.Data.Models.Enums;
+
+@{
+    ViewData["Title"] = "Engine Details";
+}
+
+<div align="center">
+    <h1>Engine Details</h1>
+    <br />
+</div>
+<form class="form-group col-md-3 center" align="center" asp-controller="Engines" asp-action="All">
+    <table width="100%" class="center">
+        <tbody>
+            <tr>
+                <td align="left"><label asp-for="ModelMakeName"></label><span class="coln">:</span></td>
+                <td align="right">@Model.ModelMakeName</td>
+            </tr>
+            <tr>
+                <td align="left"><label asp-for="ModelName"></label><span class="coln">:</span></td>
+                <td align="right">@Model.ModelName</td>
+            </tr>
+            <tr>
+                <td align="left"><label asp-for="Power"></label><span class="coln">:</span></td>
+                <td align="right">@Model.Power</td>
+            </tr>
+            <tr>
+                <td align="left"><label asp-for="Displacement"></label><span class="coln">:</span></td>
+                <td align="right">@Model.Displacement</td>
+            </tr>
+            <tr>
+                <td align="left"><label asp-for="GearType"></label><span class="coln">:</span></td>
+                <td align="right">@Model.GearType</td>
+            </tr>
+            <tr>
+                <td align="left"><label asp-for="Gear"></label><span class="coln">:</span></td>
+                <td align="right">@Model.Gear</td>
+            </tr>
+            <tr>
+                <td align="left"><label asp-for="YearFrom"></label><span class="coln">:</span></td>
+                <td align="right">@Model.YearFrom</td>
+            </tr>
+            <tr>
+                <td align="left"><label asp-for="YearTo"></label><span class="coln">:</span></td>
+                <td align="right">@Model.YearTo</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <div class="col-md">
+        <button type="submit" class="btn btn-secondary">Back To All Engines</button>
+        @*<a asp-action="All">To All Makes</a>
+        <a class="btn btn-secondary" asp-action="All" role="button">Back To All Makes</a>*@
+    </div>
+</form>

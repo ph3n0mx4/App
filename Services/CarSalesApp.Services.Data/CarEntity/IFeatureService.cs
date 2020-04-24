@@ -8,5 +8,7 @@ namespace CarSalesApp.Services.Data.CarEntity
     public interface IFeatureService
     {
         Task AddAsync(string name, int typeId);
+
+        Task<IEnumerable<T>> GetAllOfTypeAsync<T>(string type);
     }
 }

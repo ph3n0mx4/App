@@ -19,7 +19,9 @@ namespace CarSalesApp.Web.ViewModels.Home
 
         public string CreatedOn { get; set; }
 
-        public string ModifiedOn{ get; set; }
+        public string ModifiedOn { get; set; }
+
+        public string MainImage { get; set; }
 
         public string FirstRegistration { get; set; }
 

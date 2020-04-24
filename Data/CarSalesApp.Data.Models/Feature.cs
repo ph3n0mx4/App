@@ -11,7 +11,7 @@
     {
         public Feature()
         {
-            this.Cars = new HashSet<Car>();
+            this.CarsFeatures = new HashSet<CarFeature>();
         }
 
         public string Name { get; set; }
@@ -20,6 +20,6 @@
 
         public virtual FeatureType Type { get; set; }
 
-        public ICollection<Car> Cars { get; set; }
+        public ICollection<CarFeature> CarsFeatures { get; set; }
     }
 }

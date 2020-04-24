@@ -1,7 +1,10 @@
 ﻿using CarSalesApp.Data.Common.Repositories;
 using CarSalesApp.Data.Models;
+using CarSalesApp.Services.Mapping;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,6 +29,16 @@ namespace CarSalesApp.Services.Data.CarEntity
 
             await this.featureRepository.AddAsync(feature);
             await this.featureRepository.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<T>> GetAllOfTypeAsync<T>(string type)
+        {
+            var features = await this.featureRepository.All()
+                .Where(x => x.Type.Name == type)
+                .To<T>()
+                .ToListAsync();
+
+            return features;
         }
     }
 }

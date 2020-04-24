@@ -3,8 +3,8 @@
 @using CarSalesApp.Data.Models.Enums;
 
 @{
+    ViewData["Title"] = "Add Engine";
     var makes = Model.Makes.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
-
 }
 
 <div align="center">
@@ -12,7 +12,7 @@
     <br />
 </div>
 
-<form class="form-group col-md-6 center" align="center" asp-controller="Entities" asp-action="AddEngine" method="post" enctype="multipart/form-data">
+<form class="form-group col-md-6 center" align="center" asp-controller="Engines" asp-action="AddEngine" method="post" enctype="multipart/form-data">
     <div>
         <div>
             <label >Makes</label>

@@ -78,3 +78,19 @@ function getModelForCurrentMakeInDetails() {
         $("#modelId").html(item);
     });
 }
+
+function getDrivesWithCurrentFuelForAllEngines() {
+    $("#driveId").html("hahahah");
+    var fuelId = $("#fuelList").val();
+    var modelId = $("#modelId").val();
+    var url = "/api/data/getDrives";
+
+    $.getJSON(url, { modelId: modelId, fuelId: fuelId }, function (data) {
+        var item = "";
+        $("#driveId").empty();
+        $.each(data, function (i, drive) {
+            item += '<li style="color:;font-size:17.5px" value="' + drive.value + '"><a href="/Administration/Engines/Edit/' + drive.value + '">' + drive.text + '</a></li>'
+        });
+        $("#driveId").html(item);
+    });
+}

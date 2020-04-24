@@ -1,0 +1,76 @@
+﻿@model CarSalesApp.Web.ViewModels.Administration.Engines.EditEngineViewModel
+@using CarSalesApp.Data.Models.Enums;
+
+@{
+    ViewData["Title"] = "Edit Engine";
+}
+
+<div align="center">
+    <h1>Edit engine</h1>
+    <br />
+</div>
+
+
+<form class="form-group col-md-6 center" align="center" asp-controller="Engines" asp-action="Edit" method="post">
+    <div>
+        <label asp-for="Power"></label>
+        <input asp-for="Power" class="form-control" type="number" placeholder="Enter Power" />
+        <span asp-validation-for="Power" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Displacement"></label>
+        <input asp-for="Displacement" class="form-control" type="number" placeholder="Enter Displacement" />
+        <span asp-validation-for="Displacement" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="GearType"></label>
+        <select asp-for="GearType" id="fuelList" asp-items="Html.GetEnumSelectList<GearType>()"
+                class="form-control btn btn-secondary dropdown-toggle">
+            <option>--Select Gear Type--</option>
+        </select>
+        <span asp-validation-for="GearType" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Gear"></label>
+        <input asp-for="Gear" class="form-control" type="number" placeholder="Enter number of gear" />
+        <span asp-validation-for="Gear" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="YearFrom"></label>
+        <select asp-for="YearFrom" id="yearselect" class="selectpicker form-control btn btn-secondary dropdown-toggle">
+            <option>--Select Year From--</option>
+            @for (int i = 1950; i <= @DateTime.Now.Year; i++)
+            {
+                <option>@i</option>
+            }
+        </select>
+        <span asp-validation-for="YearFrom" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="YearTo"></label>
+        <select asp-for="YearTo" id="yearselect" class="selectpicker form-control btn btn-secondary dropdown-toggle">
+            <option>--Select Year From--</option>
+            @for (int i = 1950; i <= @DateTime.Now.Year; i++)
+            {
+                <option>@i</option>
+            }
+        </select>
+        <span asp-validation-for="YearTo" class="text-danger"></span>
+    </div>
+    <!--<div id="makeName">
+        <label>Make</label>
+        <input asp-for="MakeName" id="makeNameinput" class="form-control" placeholder="Enter New Make" />
+        <span asp-validation-for="MakeName" class="text-danger"></span>
+        <p style="color: lightslategrey; font-size:12.5px">(Change make in above field)</p>
+    </div>
+    <div>
+        <label>Model</label>
+        <input asp-for="Name" class="form-control" placeholder="Enter Model" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>-->
+    <br />
+    <div class="col-md">
+        <button type="submit" class="btn btn-secondary">Save Changes</button>
+        <a class="btn btn-secondary" asp-action="All" role="button">Back</a>
+    </div>
+</form>

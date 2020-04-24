@@ -9,5 +9,7 @@
         //public const string AdminRoleName = "Admin";
 
         public const string UserNameAdmin = "admin@gmail.com";
+
+        public const string featureTypeNameSafety = "Safety & Security";
     }
 }
