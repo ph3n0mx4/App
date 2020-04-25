@@ -34,6 +34,7 @@
                               new FeaturesSeeder(),
                               new DrivesSeeder(),
                               new AddRoleToUserSeeder(),
+                              new FeatureTypesSeeder(),
                           };
 
             foreach (var seeder in seeders)

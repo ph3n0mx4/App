@@ -9,6 +9,8 @@ namespace CarSalesApp.Services.Data.CarEntity
     {
         Task AddAsync(string name, int typeId);
 
-        Task<IEnumerable<T>> GetAllOfTypeAsync<T>(string type);
+        Task<ICollection<T>> GetAllOfTypeAsync<T>(string type);
+
+        Task<ICollection<T>> GetAllOfTypeByCarIdAsync<T>(string type, int carId);
     }
 }

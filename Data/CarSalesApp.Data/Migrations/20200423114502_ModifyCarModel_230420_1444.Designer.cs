@@ -4,14 +4,16 @@ using CarSalesApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarSalesApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200423114502_ModifyCarModel_230420_1444")]
+    partial class ModifyCarModel_230420_1444
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -181,7 +183,7 @@ namespace CarSalesApp.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BodyId")
+                    b.Property<int?>("BodyId")
                         .HasColumnType("int");
 
                     b.Property<int>("Color")
@@ -196,7 +198,10 @@ namespace CarSalesApp.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DriveId")
+                    b.Property<int?>("DriveId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("FeatureId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("FirstRegistration")
@@ -208,13 +213,10 @@ namespace CarSalesApp.Data.Migrations
                     b.Property<string>("MainImage")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MakeId")
+                    b.Property<int?>("MakeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Mileage")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ModelId")
+                    b.Property<int?>("ModelId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedOn")
@@ -229,6 +231,8 @@ namespace CarSalesApp.Data.Migrations
 
                     b.HasIndex("DriveId");
 
+                    b.HasIndex("FeatureId");
+
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("MakeId");
@@ -236,35 +240,6 @@ namespace CarSalesApp.Data.Migrations
                     b.HasIndex("ModelId");
 
                     b.ToTable("Cars");
-                });
-
-            modelBuilder.Entity("CarSalesApp.Data.Models.CarFeature", b =>
-                {
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FeatureId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("CarId", "FeatureId");
-
-                    b.HasIndex("FeatureId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("CarsFeatures");
                 });
 
             modelBuilder.Entity("CarSalesApp.Data.Models.Drive", b =>
@@ -332,9 +307,6 @@ namespace CarSalesApp.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("FeatureTypeId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -349,9 +321,9 @@ namespace CarSalesApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FeatureTypeId");
-
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("TypeId");
 
                     b.ToTable("Features");
                 });
@@ -622,42 +594,23 @@ namespace CarSalesApp.Data.Migrations
                 {
                     b.HasOne("CarSalesApp.Data.Models.Body", "Body")
                         .WithMany("Cars")
-                        .HasForeignKey("BodyId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("BodyId");
 
                     b.HasOne("CarSalesApp.Data.Models.Drive", "Drive")
                         .WithMany("Cars")
-                        .HasForeignKey("DriveId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("DriveId");
+
+                    b.HasOne("CarSalesApp.Data.Models.Feature", "Feature")
+                        .WithMany("Cars")
+                        .HasForeignKey("FeatureId");
 
                     b.HasOne("CarSalesApp.Data.Models.Make", "Make")
                         .WithMany("Cars")
-                        .HasForeignKey("MakeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("MakeId");
 
                     b.HasOne("CarSalesApp.Data.Models.Model", "Model")
                         .WithMany("Cars")
-                        .HasForeignKey("ModelId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CarSalesApp.Data.Models.CarFeature", b =>
-                {
-                    b.HasOne("CarSalesApp.Data.Models.Car", "Car")
-                        .WithMany("CarsFeatures")
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("CarSalesApp.Data.Models.Feature", "Feature")
-                        .WithMany("CarsFeatures")
-                        .HasForeignKey("FeatureId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("ModelId");
                 });
 
             modelBuilder.Entity("CarSalesApp.Data.Models.Drive", b =>
@@ -671,9 +624,11 @@ namespace CarSalesApp.Data.Migrations
 
             modelBuilder.Entity("CarSalesApp.Data.Models.Feature", b =>
                 {
-                    b.HasOne("CarSalesApp.Data.Models.FeatureType", "FeatureType")
+                    b.HasOne("CarSalesApp.Data.Models.FeatureType", "Type")
                         .WithMany("Features")
-                        .HasForeignKey("FeatureTypeId");
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CarSalesApp.Data.Models.Image", b =>

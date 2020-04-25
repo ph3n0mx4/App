@@ -10,24 +10,30 @@ using System.Text;
 
 namespace CarSalesApp.Web.ViewModels.Cars
 {
-    public class CarAdDetailsViewModel : IMapFrom<Car> //, IHaveCustomMappings
+    public class CarAdDetailsViewModel : IMapFrom<Car>, IHaveCustomMappings
     {
+        public int Id { get; set; }
+
         public string MainImage { get; set; }//
 
+        [Display(Name = "Make")]
         public int MakeId { get; set; }//
 
         public virtual Make Make { get; set; }//
 
+        [Display(Name = "Model")]
         public int ModelId { get; set; }//
 
         public virtual Model Model { get; set; }//
 
+        [Display(Name = "Body")]
         public int BodyId { get; set; }
 
         public virtual Body Body { get; set; }
 
         public decimal Price { get; set; }
 
+        [Display(Name = "Drive")]
         public int DriveId { get; set; }
 
         public virtual Drive Drive { get; set; }
@@ -39,11 +45,7 @@ namespace CarSalesApp.Web.ViewModels.Cars
         public string Description { get; set; }
 
         [Display(Name = "First Registration")]
-        public DateTime FirstRegistration { get; set; }//
-
-        public virtual ICollection<ImageCarViewModel> Images { get; set; }
-
-        public virtual ICollection<CarFeature> CarsFeatures { get; set; }
+        public DateTime FirstRegistration { get; set; }
 
         public string Title => this.Make.Name + " " + this.Model.Name;
 
@@ -58,21 +60,35 @@ namespace CarSalesApp.Web.ViewModels.Cars
 
         public string Seats => this.Body.Seats.ToString();
 
+        public string ModifiedOn { get; set; }
+
+        public string CreatedOn { get; set; }
+
+        public virtual ICollection<ImageCarViewModel> Images { get; set; }
+
+        public ICollection<CarFeatureViewModel> CarsFeatures { get; set; }
+
         public ICollection<FeatureViewModel> Safety { get; set; }
 
         public ICollection<FeatureViewModel> Entartaiment { get; set; }
 
-        public ICollection<FeatureViewModel> Comfort { get; set; }
+        public IEnumerable<FeatureViewModel> Comfort { get; set; }
 
         public ICollection<FeatureViewModel> Extras { get; set; }
 
 
-        //public void CreateMappings(IProfileExpression configuration)
-        //{
-        //    configuration.CreateMap<Car, CarAdDetailsViewModel>()
-        //        .ForMember(
-        //            x => x.CC,
-        //            x => x.MapFrom(z => z.CC));
-        //}
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration.CreateMap<Car, CarAdDetailsViewModel>()
+                .ForMember(
+                    x => x.CreatedOn,
+                    x => x.MapFrom(z => z.CreatedOn.ToString("HH:mm dd/MM/yyyy")))
+                .ForMember(
+                    x => x.ModifiedOn,
+                    x => x.MapFrom(z => z.ModifiedOn.HasValue ? z.ModifiedOn.Value.ToString("HH:mm dd/MM/yyyy") : null));
+                //.ForMember(
+                //    x => x.CarFeatures,
+                //    x => x.MapFrom(z => z.CarsFeatures));
+        }
     }
 }

@@ -76,6 +76,7 @@
             services.AddTransient<IEngineService, EngineService>();
             services.AddTransient<IFeatureTypeService, FeatureTypeService>();
             services.AddTransient<IFeatureService, FeatureService>();
+            services.AddTransient<IImageService, ImageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

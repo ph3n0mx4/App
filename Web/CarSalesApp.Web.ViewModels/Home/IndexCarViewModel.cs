@@ -11,8 +11,6 @@ namespace CarSalesApp.Web.ViewModels.Home
 
         public string Title { get; set; } //make+model
 
-        public string GeneralImg { get; set; }
-
         public string Power { get; set; }
 
         public string Description { get; set; }

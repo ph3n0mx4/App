@@ -7,6 +7,8 @@ namespace CarSalesApp.Services.Data
 {
     public interface ICloudinaryService
     {
-        Task<IEnumerable<string>> UploadAsync(Cloudinary cloudinary, ICollection<IFormFile> files);
+        Task<IEnumerable<string>> UploadAsyncFiles(Cloudinary cloudinary, IEnumerable<IFormFile> files);
+
+        Task<string> UploadAsyncFile(Cloudinary cloudinary, IFormFile file);
     }
 }

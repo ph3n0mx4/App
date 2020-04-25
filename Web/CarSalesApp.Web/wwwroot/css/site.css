@@ -62,8 +62,8 @@ body {
 .divTable {
     display: table;
     width: auto;
-    background-color:;
-    border:;
+    /*background-color:;
+    border:;*/
     border-spacing: 5px; /*cellspacing:poor IE support for  this*/
     /* border-collapse:separate;*/
 }
@@ -77,13 +77,18 @@ body {
     float: left; /*fix for  buggy browsers*/
     display: table-column;
     width: 200px;
-    background-color: ;
+    /*background-color: ;*/
 }
 
 .divCellRight {
     float: right; /*fix for  buggy browsers*/
     display: table-column;
     width: 200px;
-    background-color:;
+    /*background-color:;*/
+}
+
+.carousel {
+    width: 700px;
+    height: 450px;
 }
 

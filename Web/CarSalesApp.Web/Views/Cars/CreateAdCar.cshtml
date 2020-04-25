@@ -9,10 +9,6 @@
 
 <h1>CreateAdCar</h1>
 
-<form id="az">
-    <button type="submit" class="btn btn-primary">Privacy</button>
-</form>
-
 <form class="form-group container-fluid" asp-controller="Cars" asp-action="CreateAdCar" method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-4">
@@ -20,18 +16,21 @@
             <select asp-for="MakeId" asp-items="@makes" id="makeList" class="form-control btn btn-secondary dropdown-toggle" onchange="getModelForCurrentMake()">
                 <option>--Select Make--</option>
             </select>
+            <span asp-validation-for="MakeId" class="text-danger"></span>
         </div>
         <div class="col-md-4">
             <label asp-for="ModelId">Model </label>
             <select asp-for="ModelId" id="modelId" class="selectpicker form-control btn btn-secondary dropdown-toggle">
                 <option>--Select Model--</option>
             </select>
+            <span asp-validation-for="ModelId" class="text-danger"></span>
         </div>
         <div class="col-md-4">
             <label asp-for="BodyId">Bodies</label>
             <select asp-for="BodyId" asp-items="@bodies" id="bodyList" class="form-control btn btn-secondary dropdown-toggle">
                 <option>--Select Body--</option>
             </select>
+            <span asp-validation-for="BodyId" class="text-danger"></span>
         </div>
         <div class="col-md-4">
             <label asp-for="Color">Colors</label>
@@ -39,6 +38,7 @@
                     class="form-control btn btn-secondary dropdown-toggle">
                 <option>--Select Color--</option>
             </select>
+            <span asp-validation-for="Color" class="text-danger"></span>
         </div>
         <div class="col-md-4">
             <label asp-for="Month">Months</label>
@@ -46,10 +46,18 @@
                     class="form-control btn btn-secondary dropdown-toggle">
                 <option>--Select Month--</option>
             </select>
+            <span asp-validation-for="Month" class="text-danger"></span>
         </div>
         <div class="col-md-4">
-            <label asp-for="Year">Years</label>
-            @Html.DropDownList("Year", new SelectList(Enumerable.Range(1950, DateTime.UtcNow.Year - 1950 + 1).ToList()), "-- Select Year --", new { @class = "form-control btn btn-secondary dropdown-toggle" })
+            <label asp-for="Year"></label>
+            <select asp-for="Year" id="yearselect" class="selectpicker form-control btn btn-secondary dropdown-toggle">
+                <option>--Select Year From--</option>
+                @for (int i = 1950; i <= @DateTime.Now.Year; i++)
+                {
+                    <option>@i</option>
+                }
+            </select>
+            <span asp-validation-for="Year" class="text-danger"></span>
         </div>
         <div class="col-md-4">
             <label asp-for="FuelId">Fuel</label>
@@ -57,20 +65,96 @@
                     class="form-control btn btn-secondary dropdown-toggle" onchange="getDrivesWithCurrentFuelForAdCar()">
                 <option>--Select Fuel--</option>
             </select>
+            <span asp-validation-for="FuelId" class="text-danger"></span>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Mileage"></label>
+            <input asp-for="Mileage" class="form-control" type="number" placeholder="Enter Displacement" />
+            <span asp-validation-for="Mileage" class="text-danger"></span>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Price"></label>
+            <input asp-for="Price" class="form-control" type="number" placeholder="Enter Displacement" />
+            <span asp-validation-for="Price" class="text-danger"></span>
         </div>
         <div class="col-md-4">
             <label asp-for="DriveId">Drives</label>
             <select asp-for="DriveId" id="driveId" class="selectpicker form-control btn btn-secondary dropdown-toggle">
                 <option>--Select Drives--</option>
             </select>
+            <span asp-validation-for="DriveId" class="text-danger"></span>
         </div>
         <div class="col-md-4">
-            <label asp-for="Files">Files</label>
-            <input asp-for="Files" type="file" class="btn btn-secondary @*toggle*@" name="Files" multiple>
+            <label asp-for="MainImage"></label><small class="text-muted">  - Only one image - Required field</small>
+            <input asp-for="MainImage" type="file" class="btn btn-secondary @*toggle*@" name="MainImage">
         </div>
-        <div class="col-md">
-            <button type="submit" class="btn btn-secondary">Add</button>
+        <div class="col-md-4">
+            <label asp-for="Images"></label><small class="text-muted">  - Least one image - Required field</small>
+            <input asp-for="Images" type="file" class="btn btn-secondary @*toggle*@" name="Images" multiple>
         </div>
     </div>
+    <br />
+    <h4>Equipment</h4>
+    <div class="container">
+        <span asp-validation-for="InputFeatures" class="text-danger"></span>
+        <div class="row">
+            <div class="col-3">
+                <h5>Comfort & Convenience</h5>
+                @foreach (var item in Model.Comfort)
+                {
+                    <div>
+                        <input type="checkbox" class="custom-control-input" name="InputFeatures" id="customCheck(@item.Id)" value="@item.Id" />
+                        <label class="custom-control-label" for="customCheck(@item.Id)">@item.Name</label>
+                    </div>
+                }
+            </div>
+            <div class="col-3">
+                <h5>Entertainment & Media</h5>
+                @foreach (var item in Model.Entartaiment)
+                {
+                    <div>
+                        <input type="checkbox" class="custom-control-input" name="InputFeatures" id="customCheck(@item.Id)" value="@item.Id" />
+                        <label class="custom-control-label" for="customCheck(@item.Id)">@item.Name</label>
+                    </div>
+                }
+            </div>
+            <div class="col-3">
+                <h5>Extras</h5>
+                @foreach (var item in Model.Extras)
+                {
+                    <div>
+                        <input type="checkbox" class="custom-control-input" name="InputFeatures" id="customCheck(@item.Id)" value="@item.Id" />
+                        <label class="custom-control-label" for="customCheck(@item.Id)">@item.Name</label>
+                    </div>
+                }
+            </div>
+            <div class="col-3">
+                <h5>Safety & Security</h5>
+                @foreach (var item in Model.Safety)
+                {
+                    <div>
+                        <input type="checkbox" class="custom-control-input" name="InputFeatures" id="customCheck(@item.Id)" value="@item.Id" />
+                        <label class="custom-control-label" for="customCheck(@item.Id)">@item.Name</label>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+    <br />
+
+    <div>
+        <label asp-for="Description" class="control-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="col-md">
+        <button type="submit" class="btn btn-secondary">Add</button>
+    </div>
 </form>
+
+
+
+
 

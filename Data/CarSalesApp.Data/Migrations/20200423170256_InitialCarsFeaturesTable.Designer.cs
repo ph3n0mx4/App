@@ -4,14 +4,16 @@ using CarSalesApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarSalesApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200423170256_InitialCarsFeaturesTable")]
+    partial class InitialCarsFeaturesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -246,23 +248,9 @@ namespace CarSalesApp.Data.Migrations
                     b.Property<int>("FeatureId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("CarId", "FeatureId");
 
                     b.HasIndex("FeatureId");
-
-                    b.HasIndex("IsDeleted");
 
                     b.ToTable("CarsFeatures");
                 });
@@ -332,9 +320,6 @@ namespace CarSalesApp.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("FeatureTypeId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -349,9 +334,9 @@ namespace CarSalesApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FeatureTypeId");
-
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("TypeId");
 
                     b.ToTable("Features");
                 });
@@ -671,9 +656,11 @@ namespace CarSalesApp.Data.Migrations
 
             modelBuilder.Entity("CarSalesApp.Data.Models.Feature", b =>
                 {
-                    b.HasOne("CarSalesApp.Data.Models.FeatureType", "FeatureType")
+                    b.HasOne("CarSalesApp.Data.Models.FeatureType", "Type")
                         .WithMany("Features")
-                        .HasForeignKey("FeatureTypeId");
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CarSalesApp.Data.Models.Image", b =>
