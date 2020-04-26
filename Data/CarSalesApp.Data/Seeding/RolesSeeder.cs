@@ -1,14 +1,12 @@
 ﻿namespace CarSalesApp.Data.Seeding
 {
+    using CarSalesApp.Common;
+    using CarSalesApp.Data.Models;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.Extensions.DependencyInjection;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-
-    using CarSalesApp.Common;
-    using CarSalesApp.Data.Models;
-
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.Extensions.DependencyInjection;
 
     internal class RolesSeeder : ISeeder
     {

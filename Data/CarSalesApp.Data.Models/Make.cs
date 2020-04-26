@@ -1,10 +1,7 @@
 ﻿namespace CarSalesApp.Data.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-
     using CarSalesApp.Data.Common.Models;
+    using System.Collections.Generic;
 
     public class Make : BaseDeletableModel<int>
     {

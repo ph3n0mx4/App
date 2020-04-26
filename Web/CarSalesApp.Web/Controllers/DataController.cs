@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using System.Linq;
-
+﻿using CarSalesApp.Data;
+using CarSalesApp.Data.Models.Enums;
+using CarSalesApp.Services.Mapping;
+using CarSalesApp.Web.ViewModels.Cars;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using CarSalesApp.Data;
-using CarSalesApp.Data.Models.Enums;
-using CarSalesApp.Web.ViewModels.Cars;
-using CarSalesApp.Services.Mapping;
+using System;
+using System.Linq;
 
 namespace CarSalesApp.Web.Controllers
 {

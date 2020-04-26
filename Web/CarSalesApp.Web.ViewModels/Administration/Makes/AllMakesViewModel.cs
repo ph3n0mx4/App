@@ -1,9 +1,7 @@
 ﻿using CarSalesApp.Data.Models;
 using CarSalesApp.Services.Mapping;
 using CarSalesApp.Web.ViewModels.Cars;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace CarSalesApp.Web.ViewModels.Administration.Makes
 {

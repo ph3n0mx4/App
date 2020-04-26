@@ -1,10 +1,9 @@
 ﻿namespace CarSalesApp.Data.Seeding
 {
+    using CarSalesApp.Data.Models;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-
-    using CarSalesApp.Data.Models;
 
     internal class SettingsSeeder : ISeeder
     {

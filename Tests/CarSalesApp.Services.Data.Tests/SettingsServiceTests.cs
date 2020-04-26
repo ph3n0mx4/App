@@ -1,18 +1,14 @@
 ﻿namespace CarSalesApp.Services.Data.Tests
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-
     using CarSalesApp.Data;
     using CarSalesApp.Data.Common.Repositories;
     using CarSalesApp.Data.Models;
     using CarSalesApp.Data.Repositories;
-
     using Microsoft.EntityFrameworkCore;
-
     using Moq;
-
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Xunit;
 
     public class SettingsServiceTests

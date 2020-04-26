@@ -1,9 +1,8 @@
 ﻿namespace CarSalesApp.Data.Models
 {
-    using System.Collections.Generic;
-
     using CarSalesApp.Data.Common.Models;
     using CarSalesApp.Data.Models.Enums;
+    using System.Collections.Generic;
 
     public class Body : BaseDeletableModel<int>
     {

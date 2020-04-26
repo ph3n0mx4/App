@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using CarSalesApp.Data.Models;
+﻿using CarSalesApp.Data.Models;
 using CarSalesApp.Data.Models.Enums;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CarSalesApp.Data.Seeding
 {

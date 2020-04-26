@@ -1,19 +1,14 @@
-﻿using System;
+﻿using CarSalesApp.Common;
+using CarSalesApp.Data;
+using CarSalesApp.Services.Data;
+using CarSalesApp.Services.Data.CarEntity;
+using CarSalesApp.Services.Mapping;
+using CarSalesApp.Web.ViewModels.Cars;
+using CloudinaryDotNet;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CarSalesApp.Data;
-using CarSalesApp.Data.Models;
-using CarSalesApp.Web.ViewModels.Administration.Dashboard;
-using CarSalesApp.Web.ViewModels.Cars;
-using Microsoft.AspNetCore.Mvc;
-using CarSalesApp.Services.Mapping;
-using CarSalesApp.Services.Data;
-using CloudinaryDotNet;
-using Microsoft.AspNetCore.Http;
-using CarSalesApp.Services.Data.CarEntity;
-using CarSalesApp.Common;
-using CarSalesApp.Data.Models.Enums;
 
 namespace CarSalesApp.Web.Controllers
 {

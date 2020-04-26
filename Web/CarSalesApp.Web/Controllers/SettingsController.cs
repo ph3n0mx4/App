@@ -1,14 +1,12 @@
 ﻿namespace CarSalesApp.Web.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-
     using CarSalesApp.Data.Common.Repositories;
     using CarSalesApp.Data.Models;
     using CarSalesApp.Services.Data;
     using CarSalesApp.Web.ViewModels.Settings;
-
     using Microsoft.AspNetCore.Mvc;
+    using System;
+    using System.Threading.Tasks;
 
     public class SettingsController : BaseController
     {

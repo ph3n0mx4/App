@@ -1,8 +1,5 @@
 ﻿using CarSalesApp.Data.Common.Repositories;
 using CarSalesApp.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CarSalesApp.Services.Data.CarEntity

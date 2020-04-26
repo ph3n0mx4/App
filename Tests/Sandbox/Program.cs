@@ -1,10 +1,5 @@
 ﻿namespace Sandbox
 {
-    using System;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Threading.Tasks;
-
     using CarSalesApp.Data;
     using CarSalesApp.Data.Common;
     using CarSalesApp.Data.Common.Repositories;
@@ -13,13 +8,15 @@
     using CarSalesApp.Data.Seeding;
     using CarSalesApp.Services.Data;
     using CarSalesApp.Services.Messaging;
-
     using CommandLine;
-
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    using System;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Threading.Tasks;
 
     public static class Program
     {

@@ -1,11 +1,9 @@
 ﻿namespace CarSalesApp.Data.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-
     using CarSalesApp.Data.Common.Models;
     using CarSalesApp.Data.Models.Enums;
+    using System;
+    using System.Collections.Generic;
 
     public class Drive : BaseDeletableModel<int>
     {

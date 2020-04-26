@@ -1,11 +1,7 @@
-﻿using AutoMapper;
-using CarSalesApp.Data.Models;
+﻿using CarSalesApp.Data.Models;
 using CarSalesApp.Data.Models.Enums;
 using CarSalesApp.Services.Mapping;
 using EnumsNET;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CarSalesApp.Web.ViewModels.Cars
 {

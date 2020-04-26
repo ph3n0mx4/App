@@ -1,16 +1,10 @@
 ﻿namespace CarSalesApp.Web.Controllers
 {
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.Linq;
-    using CarSalesApp.Data;
-    using CarSalesApp.Data.Common.Repositories;
-    using CarSalesApp.Data.Models;
+    using CarSalesApp.Services.Data;
     using CarSalesApp.Web.ViewModels;
     using CarSalesApp.Web.ViewModels.Home;
     using Microsoft.AspNetCore.Mvc;
-    using CarSalesApp.Services.Mapping;
-    using CarSalesApp.Services.Data;
+    using System.Diagnostics;
 
     public class HomeController : BaseController
     {

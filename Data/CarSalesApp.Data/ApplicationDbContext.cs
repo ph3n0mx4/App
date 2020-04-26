@@ -1,16 +1,14 @@
 ﻿namespace CarSalesApp.Data
 {
+    using CarSalesApp.Data.Common.Models;
+    using CarSalesApp.Data.Models;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
     using System;
     using System.Linq;
     using System.Reflection;
     using System.Threading;
     using System.Threading.Tasks;
-
-    using CarSalesApp.Data.Common.Models;
-    using CarSalesApp.Data.Models;
-
-    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {

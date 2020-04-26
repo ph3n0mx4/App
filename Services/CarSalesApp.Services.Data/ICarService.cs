@@ -1,6 +1,5 @@
 ﻿using CarSalesApp.Data.Models.Enums;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CarSalesApp.Services.Data

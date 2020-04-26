@@ -1,8 +1,8 @@
-﻿using System;
+﻿using CarSalesApp.Common;
+using CarSalesApp.Data.Models;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using CarSalesApp.Common;
-using CarSalesApp.Data.Models;
 
 namespace CarSalesApp.Data.Seeding
 {

@@ -2,10 +2,8 @@
 using CarSalesApp.Data.Models;
 using CarSalesApp.Services.Mapping;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CarSalesApp.Services.Data.CarEntity

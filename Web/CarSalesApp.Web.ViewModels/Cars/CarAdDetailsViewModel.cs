@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 
 namespace CarSalesApp.Web.ViewModels.Cars
 {
@@ -86,9 +84,9 @@ namespace CarSalesApp.Web.ViewModels.Cars
                 .ForMember(
                     x => x.ModifiedOn,
                     x => x.MapFrom(z => z.ModifiedOn.HasValue ? z.ModifiedOn.Value.ToString("HH:mm dd/MM/yyyy") : null));
-                //.ForMember(
-                //    x => x.CarFeatures,
-                //    x => x.MapFrom(z => z.CarsFeatures));
+            //.ForMember(
+            //    x => x.CarFeatures,
+            //    x => x.MapFrom(z => z.CarsFeatures));
         }
     }
 }

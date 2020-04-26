@@ -1,10 +1,9 @@
 ﻿using CarSalesApp.Data.Models;
+using CarSalesApp.Data.Models.Enums;
+using CarSalesApp.Services.Mapping;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using CarSalesApp.Data.Models.Enums;
-using Microsoft.AspNetCore.Http;
-using CarSalesApp.Services.Mapping;
 using System.ComponentModel.DataAnnotations;
 
 namespace CarSalesApp.Web.ViewModels.Cars
@@ -32,7 +31,7 @@ namespace CarSalesApp.Web.ViewModels.Cars
         [Required]
         [Display(Name = "Body")]
         public int BodyId { get; set; }
-        
+
         public IEnumerable<BodyInputViewModel> Bodies { get; set; }
 
         [Required]
