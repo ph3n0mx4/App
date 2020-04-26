@@ -36,26 +36,27 @@ namespace CarSalesApp.Services.Data
             return query.To<T>().ToList();
         }
 
-        public T GetByName<T>(string name)
+        public T GetByName<T>(string makeName)
+            where T : class
         {
+            if (makeName == null)
+            {
+                return null;
+            }
+
             var make = this.makeRepository.All()
-                .Where(x => x.Name.ToLower() == name.ToLower())
+                .Where(x => x.Name.ToLower() == makeName.ToLower())
                 .To<T>().FirstOrDefault();
             return make;
         }
 
-        public bool IsHasMakeId(int makeId)
-        {
-            var currentMake = this.makeRepository.All()
-                .Where(x => x.Id == makeId)
-                .Select(x => x.Id)
-                .FirstOrDefault();
-
-            return currentMake == makeId;
-        }
-
         public bool IsHasMakeName(string makeName)
         {
+            if (makeName == null)
+            {
+                return false;
+            }
+
             var currentMake = this.makeRepository.All()
                 .Where(x => x.Name == makeName)
                 .Select(x => x.Name)

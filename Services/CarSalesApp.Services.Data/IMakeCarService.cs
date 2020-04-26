@@ -9,11 +9,10 @@ namespace CarSalesApp.Services.Data
     {
         IEnumerable<T> GetAll<T>();
 
-        T GetByName<T>(string name);
+        T GetByName<T>(string name)
+            where T : class;
 
         Task<int> AddAsync(string name);
-
-        bool IsHasMakeId(int makeId);
 
         bool IsHasMakeName(string makeName);
 
