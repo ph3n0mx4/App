@@ -7,13 +7,14 @@ namespace CarSalesApp.Services.Data
     {
         IEnumerable<T> GetAll<T>();
 
-        T GetByName<T>(string name);
+        IEnumerable<T> GetAllByMakeId<T>(int makeId);
+
+        T GetByName<T>(string name)
+            where T : class;
 
         T GetById<T>(int id);
 
         Task<int> AddAsync(string name, int makeId);
-
-        bool IsHasModelName(string modelName);
 
         Task<int> EditAsync(int id, string name, string makeName);
     }

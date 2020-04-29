@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CarSalesApp.Services.Data.CarEntity
 {
@@ -9,5 +10,7 @@ namespace CarSalesApp.Services.Data.CarEntity
         T GetById<T>(int id);
 
         Task<int> EditAsync(int id, int displacement, int gear, int gearType, int power, int yearFrom, int yearTo);
+
+        IEnumerable<T> GetAllByModelIdAndFuelId<T>(int modelId, int fuelId);
     }
 }

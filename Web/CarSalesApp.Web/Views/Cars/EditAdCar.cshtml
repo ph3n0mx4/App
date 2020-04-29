@@ -1,18 +1,18 @@
-﻿@model CarSalesApp.Web.ViewModels.Cars.CreateAdCarInputFormViewModel
+﻿@model CarSalesApp.Web.ViewModels.Cars.EditCarAdViewModel
 @using CarSalesApp.Data.Models.Enums;
-@using System;
 
 @{
-    ViewData["Title"] = "CreateAdCar";
+    ViewData["Title"] = "EditAdCar";
     var makes = Model.Makes.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
+    var models = Model.Models.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
     var bodies = Model.Bodies.Select(x => new SelectListItem(x.Title, x.Id.ToString()));
-    //var comfort = Model.Comfort.Select(x => new SelectListItem(x.Name, x.Id.ToString(), false));
-    var comf = Model.Comfort.ToList();
+    var drives = Model.Drives.Select(x => new SelectListItem(x.Title, x.Id.ToString()));
+
 }
 
-<h1>CreateAdCar</h1>
+<h1 id="hhhh">EditAdCar</h1>
 
-<form class="form-group container-fluid" asp-controller="Cars" asp-action="CreateAdCar" method="post" enctype="multipart/form-data">
+<form class="form-group container-fluid" asp-controller="Cars" asp-action="EditAdCar" method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-4">
             <label asp-for="MakeId">Makes</label>
@@ -23,7 +23,7 @@
         </div>
         <div class="col-md-4">
             <label asp-for="ModelId">Model </label>
-            <select asp-for="ModelId" id="modelId" class="selectpicker form-control btn btn-secondary dropdown-toggle">
+            <select asp-for="ModelId" asp-items="@models" id="modelId" class="selectpicker form-control btn btn-secondary dropdown-toggle">
                 <option>--Select Model--</option>
             </select>
             <span asp-validation-for="ModelId" class="text-danger"></span>
@@ -82,16 +82,16 @@
         </div>
         <div class="col-md-4">
             <label asp-for="DriveId">Drives</label>
-            <select asp-for="DriveId" id="driveId" class="selectpicker form-control btn btn-secondary dropdown-toggle">
-                <option>--Select Drives--</option>
+            <select asp-for="DriveId" asp-items="@drives" id="driveId" class="selectpicker form-control btn btn-secondary dropdown-toggle">
+                <option>--Select Drive--</option>
             </select>
             <span asp-validation-for="DriveId" class="text-danger"></span>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" hidden>
             <label asp-for="MainImage"></label><small class="text-muted">  - Only one image - Required field</small>
             <input asp-for="MainImage" type="file" class="btn btn-secondary @*toggle*@" name="MainImage">
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4" hidden>
             <label asp-for="Images"></label><small class="text-muted">  - Least one image - Required field</small>
             <input asp-for="Images" type="file" class="btn btn-secondary @*toggle*@" name="Images" multiple>
         </div>
@@ -99,46 +99,86 @@
     <br />
     <h4>Equipment</h4>
     <div class="container">
-        <span asp-validation-for="InputFeatures" class="text-danger"></span>
+        <span asp-validation-for="CarFeatures" class="text-danger"></span>
         <div class="row">
             <div class="col-3">
                 <h5>Comfort & Convenience</h5>
                 @foreach (var item in Model.Comfort)
                 {
-                    <div>
-                        <input type="checkbox" class="custom-control-input" name="InputFeatures" id="customCheck(@item.Id)" value="@item.Id"/>
-                        <label class="custom-control-label" for="customCheck(@item.Id)">@item.Name</label>
-                    </div>
+                    @if (Model.CarFeatures.Any(x => x.Id == item.Id))
+                    {
+                        <div>
+                            <input type="checkbox" class="custom-control-input" name="InputFeatures" id="customCheck(@item.Id)" value="@item.Id" checked />
+                            <label class="custom-control-label" for="customCheck(@item.Id)">@item.Name</label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            <input type="checkbox" class="custom-control-input" name="InputFeatures" id="customCheck(@item.Id)" value="@item.Id" />
+                            <label class="custom-control-label" for="customCheck(@item.Id)">@item.Name</label>
+                        </div>
+                    }
                 }
             </div>
             <div class="col-3">
                 <h5>Entertainment & Media</h5>
                 @foreach (var item in Model.Entartaiment)
                 {
-                    <div>
-                        <input type="checkbox" class="custom-control-input" name="InputFeatures" id="customCheck(@item.Id)" value="@item.Id" />
-                        <label class="custom-control-label" for="customCheck(@item.Id)">@item.Name</label>
-                    </div>
+                    @if (Model.CarFeatures.Any(x => x.Id == item.Id))
+                    {
+                        <div>
+                            <input type="checkbox" class="custom-control-input" name="InputFeatures" id="customCheck(@item.Id)" value="@item.Id" checked />
+                            <label class="custom-control-label" for="customCheck(@item.Id)">@item.Name</label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            <input type="checkbox" class="custom-control-input" name="InputFeatures" id="customCheck(@item.Id)" value="@item.Id" />
+                            <label class="custom-control-label" for="customCheck(@item.Id)">@item.Name</label>
+                        </div>
+                    }
                 }
             </div>
             <div class="col-3">
                 <h5>Extras</h5>
                 @foreach (var item in Model.Extras)
                 {
-                    <div>
-                        <input type="checkbox" class="custom-control-input" name="InputFeatures" id="customCheck(@item.Id)" value="@item.Id" />
-                        <label class="custom-control-label" for="customCheck(@item.Id)">@item.Name</label>
-                    </div>
+                    @if (Model.CarFeatures.Any(x => x.Id == item.Id))
+                    {
+                        <div>
+                            <input type="checkbox" class="custom-control-input" name="InputFeatures" id="customCheck(@item.Id)" value="@item.Id" checked />
+                            <label class="custom-control-label" for="customCheck(@item.Id)">@item.Name</label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            <input type="checkbox" class="custom-control-input" name="InputFeatures" id="customCheck(@item.Id)" value="@item.Id" />
+                            <label class="custom-control-label" for="customCheck(@item.Id)">@item.Name</label>
+                        </div>
+                    }
                 }
             </div>
             <div class="col-3">
                 <h5>Safety & Security</h5>
                 @foreach (var item in Model.Safety)
                 {
-                    <div>
-                        <input type="checkbox" class="custom-control-input" name="InputFeatures" id="customCheck(@item.Id)" value="@item.Id" />
-                        <label class="custom-control-label" for="customCheck(@item.Id)">@item.Name</label>
-                    </div>
+                    @if (Model.CarFeatures.Any(x => x.Id == item.Id))
+                    {
+                        <div>
+                            <input type="checkbox" class="custom-control-input" name="InputFeatures" id="customCheck(@item.Id)" value="@item.Id" checked />
+                            <label class="custom-control-label" for="customCheck(@item.Id)">@item.Name</label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            <input type="checkbox" class="custom-control-input" name="InputFeatures" id="customCheck(@item.Id)" value="@item.Id" />
+                            <label class="custom-control-label" for="customCheck(@item.Id)">@item.Name</label>
+                        </div>
+                    }
                 }
             </div>
         </div>

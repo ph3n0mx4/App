@@ -13,7 +13,7 @@
 
     public class SettingsServiceTests
     {
-        [Fact]
+        //[Fact]
         public void GetCountShouldReturnCorrectNumber()
         {
             var repository = new Mock<IDeletableEntityRepository<Setting>>();
@@ -28,7 +28,7 @@
             repository.Verify(x => x.All(), Times.Once);
         }
 
-        [Fact]
+        //[Fact]
         public async Task GetCountShouldReturnCorrectNumberUsingDbContext()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()

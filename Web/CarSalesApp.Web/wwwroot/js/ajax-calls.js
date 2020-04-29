@@ -94,3 +94,20 @@ function getDrivesWithCurrentFuelForAllEngines() {
         $("#driveId").html(item);
     });
 }
+
+//function getModelForCurrentMake1() {
+//    var makeId = $("#makeList").val();
+//    var url = "/api/data/getModels";
+//    $("#hhhh").html("gagdagdads");
+//    @*@models=null;*@
+//    $.getJSON(url, { makeId: makeId }, function (data) {
+//        var item = "";
+//        $("#modelId").empty();
+
+
+//        $.each(data, function (i, model) {
+//            item += '<option value="' + model.value + '">' + model.text + '</option>'
+//        });
+//        $("#modelId").html(item);
+//    });
+//}

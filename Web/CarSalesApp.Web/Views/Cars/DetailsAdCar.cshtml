@@ -5,9 +5,12 @@
     this.ViewData["Title"] = "Details Page";
 }
 
-<div class="offset-1"><h2>@Model.Title</h2></div>
-
-<br />
+<div class="row">
+    <div class="col-6 offset-1"><h2>@Model.Title</h2></div>
+    <div hidden class="col-5" align="right"><p><a href="~/Cars/EditAdCar/@Model.Id">Edit</a>&emsp;<a href="#">Delete</a></p></div>
+    
+</div>
+@*<br />*@
 <div class="offset-1">
     <!--style="ma2x-width: 540px;"-->
     <div class="center row no-gutters">
@@ -40,9 +43,9 @@
                 </tbody>
             </table>
             <br />
-            <div class="center"><h4 style="color:brown">Email: dragunchev1992@gmail.com</h4></div>
+            <div class="center"><h4 style="color:brown">Email: @Model.User.Email</h4></div>
             <br />
-            <div class="center"><h4 style="color:brown">Phone:  9876543210</h4></div>
+            <div class="center"><h4 style="color:brown">Phone:  @Model.User.PhoneNumber</h4></div>
             <br />
             <br />
             @if (@Model.ModifiedOn == null)

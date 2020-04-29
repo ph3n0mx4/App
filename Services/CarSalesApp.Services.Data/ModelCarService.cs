@@ -4,6 +4,7 @@ using CarSalesApp.Services.Mapping;
 //using CarSalesApp.Web.ViewModels.Cars;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,8 +25,20 @@ namespace CarSalesApp.Services.Data
             return query.To<T>().ToList();
         }
 
+        public IEnumerable<T> GetAllByMakeId<T>(int makeId)
+        {
+            IQueryable query = this.modelRepository.All()
+                .Where(x => x.MakeId == makeId);
+            return query.To<T>().ToList();
+        }
+
         public async Task<int> AddAsync(string name, int makeId)
         {
+            //if (this.modelRepository.All()
+            //    .Any(x => x.Name == name)
+            //{
+
+            //}
             var model = new Model()
             {
                 Name = name,
@@ -37,26 +50,25 @@ namespace CarSalesApp.Services.Data
             return model.Id;
         }
 
-        public async Task<int> EditAsync(int id, string name, string makeName)
+        public async Task<int> EditAsync(
+            int currentModelId, string newModelName, string newMakeName)
         {
-            //public async Task EditPostContent(EditPostModel model)
-            //{
-            //    var post = await this.GetByIdAsync(model.PostId);
-            //    post.Content = new HtmlSanitizer().Sanitize(model.Content);
-            //    this.postsRepository.Update(post);
-            //    await this.postsRepository.SaveChangesAsync();
-            //}
-
-            var model = this.modelRepository.All().FirstOrDefault(m => m.Id == id);
-            model.Name = name;
-            model.Make.Name = makeName;
+            var model = this.modelRepository.All().FirstOrDefault(m => m.Id == currentModelId);
+            model.Name = newModelName;
+            model.Make.Name = newMakeName;
             this.modelRepository.Update(model);
             await this.modelRepository.SaveChangesAsync();
             return model.Id;
         }
 
         public T GetByName<T>(string name)
+            where T : class
         {
+            if (name == null)
+            {
+                return null;
+            }
+
             var model = this.modelRepository.All()
                 .Where(x => x.Name.ToLower() == name.ToLower())
                 .To<T>()
@@ -71,23 +83,6 @@ namespace CarSalesApp.Services.Data
                 .To<T>()
                 .FirstOrDefault();
             return model;
-        }
-
-        public async Task<Model> GetByIdAsync(int id)
-        {
-            var obj = await this.modelRepository.All().Where(x => x.Id == id).FirstOrDefaultAsync();
-
-            return obj;
-        }
-
-        public bool IsHasModelName(string modelName)
-        {
-            var currentMake = this.modelRepository.All()
-                .Where(x => x.Name == modelName)
-                .Select(x => x.Name)
-                .FirstOrDefault();
-
-            return currentMake == modelName;
         }
     }
 }

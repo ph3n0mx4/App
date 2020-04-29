@@ -99,7 +99,7 @@ namespace CarSalesApp.Web.Areas.Administration.Controllers
             }
 
             await this.engineService.EditAsync(input.Id, input.Displacement, input.Gear, input.GearType, input.Power, input.YearFrom, input.YearTo);
-            //return this.RedirectToAction(nameof(this.All));
+
             return this.RedirectToAction(nameof(this.Details), "Engines", new { Id = engine.Id });
         }
 

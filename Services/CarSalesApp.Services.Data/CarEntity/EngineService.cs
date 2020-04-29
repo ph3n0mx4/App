@@ -1,13 +1,15 @@
-﻿using CarSalesApp.Data.Common.Repositories;
-using CarSalesApp.Data.Models;
-using CarSalesApp.Data.Models.Enums;
-using CarSalesApp.Services.Mapping;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CarSalesApp.Services.Data.CarEntity
+﻿namespace CarSalesApp.Services.Data.CarEntity
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using CarSalesApp.Data.Common.Repositories;
+    using CarSalesApp.Data.Models;
+    using CarSalesApp.Data.Models.Enums;
+    using CarSalesApp.Services.Mapping;
+
     public class EngineService : IEngineService
     {
         private readonly IDeletableEntityRepository<Drive> driveRepository;
@@ -60,6 +62,13 @@ namespace CarSalesApp.Services.Data.CarEntity
                 .To<T>()
                 .FirstOrDefault();
             return engine;
+        }
+
+        public IEnumerable<T> GetAllByModelIdAndFuelId<T>(int modelId, int fuelId)
+        {
+            IQueryable query = this.driveRepository.All()
+                .Where(x => x.Fuel == (FuelType)fuelId && x.ModelId == modelId);
+            return query.To<T>().ToList();
         }
     }
 }

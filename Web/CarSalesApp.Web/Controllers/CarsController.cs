@@ -1,10 +1,14 @@
 ﻿using CarSalesApp.Common;
 using CarSalesApp.Data;
+using CarSalesApp.Data.Models;
 using CarSalesApp.Services.Data;
 using CarSalesApp.Services.Data.CarEntity;
 using CarSalesApp.Services.Mapping;
+using CarSalesApp.Web.ViewModels.Administration.Engines;
 using CarSalesApp.Web.ViewModels.Cars;
 using CloudinaryDotNet;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +26,10 @@ namespace CarSalesApp.Web.Controllers
         private readonly Cloudinary cloudinary;
         private readonly ICloudinaryService cloudinaryService;
         private readonly IFeatureService featureService;
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly IEngineService engineService;
 
-        public CarsController(ICarService carService, IModelCarService modelCarService, IMakeCarService makeCarService, IBodyCarService bodyCarService, ApplicationDbContext db, Cloudinary cloudinary, ICloudinaryService cloudinaryService, IFeatureService featureService)
+        public CarsController(ICarService carService, IModelCarService modelCarService, IMakeCarService makeCarService, IBodyCarService bodyCarService, ApplicationDbContext db, Cloudinary cloudinary, ICloudinaryService cloudinaryService, IFeatureService featureService, UserManager<ApplicationUser> userManager, IEngineService engineService)
         {
             this.carService = carService;
             this.modelCarService = modelCarService;
@@ -33,10 +39,13 @@ namespace CarSalesApp.Web.Controllers
             this.cloudinary = cloudinary;
             this.cloudinaryService = cloudinaryService;
             this.featureService = featureService;
+            this.userManager = userManager;
+            this.engineService = engineService;
         }
 
+        [Authorize]
         public async Task<IActionResult> CreateAdCar()
-        {//opraY serviZA !
+        {
             var viewModel = new CreateAdCarInputFormViewModel();
             viewModel.Makes = this.makeCarService.GetAll<MakeInputViewModel>();
             viewModel.Models = this.modelCarService.GetAll<ModelInputViewModel>();
@@ -50,8 +59,10 @@ namespace CarSalesApp.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateAdCar(CreateAdCarInputFormViewModel input)
         {
+            
             if (!this.ModelState.IsValid)
             {
                 input.Makes = this.makeCarService.GetAll<MakeInputViewModel>();
@@ -84,26 +95,126 @@ namespace CarSalesApp.Web.Controllers
                 inputImages = await this.cloudinaryService.UploadAsyncFiles(this.cloudinary, input.Images);
             }
 
-            var carId = await this.carService.AddAsync(input.MakeId, input.ModelId, input.DriveId, input.BodyId, input.Month, input.Year, input.FuelId, input.Color, input.InputFeatures, inputImages, input.Mileage, input.Price, inputMainImage, input.Description);
+            var userId = this.userManager.GetUserId(this.User);
 
+            var carId = await this.carService.AddAsync(input.MakeId, input.ModelId, input.DriveId, input.BodyId, input.Month, input.Year, input.Color, input.InputFeatures, inputImages, input.Mileage, input.Price, inputMainImage, input.Description, userId);
 
             return this.RedirectToAction(nameof(this.DetailsAdCar), "Cars", new { Id = carId });
         }
 
         public async Task<IActionResult> DetailsAdCar(int id)
         {
-            var carViewModel = this.db.Cars.Where(x => x.Id == id).To<CarAdDetailsViewModel>().FirstOrDefault();
-            carViewModel.Safety = await this.featureService.GetAllOfTypeByCarIdAsync<FeatureViewModel>(GlobalConstants.FeatureTypeNameSafety, carViewModel.Id);
-            carViewModel.Extras = await this.featureService.GetAllOfTypeByCarIdAsync<FeatureViewModel>(GlobalConstants.FeatureTypeNameExtras, carViewModel.Id);
-            carViewModel.Entartaiment = await this.featureService.GetAllOfTypeByCarIdAsync<FeatureViewModel>(GlobalConstants.FeatureTypeNameEntertainment, carViewModel.Id);
-            carViewModel.Comfort = await this.featureService.GetAllOfTypeByCarIdAsync<FeatureViewModel>(GlobalConstants.FeatureTypeNameComfort, carViewModel.Id);
+            var carViewModel = this.carService.GetById<CarAdDetailsViewModel>(id);
 
             if (carViewModel == null)
             {
                 return this.NotFound();
             }
 
+            carViewModel.Safety = await this.featureService.GetAllOfTypeByCarIdAsync<FeatureViewModel>(GlobalConstants.FeatureTypeNameSafety, carViewModel.Id);
+            carViewModel.Extras = await this.featureService.GetAllOfTypeByCarIdAsync<FeatureViewModel>(GlobalConstants.FeatureTypeNameExtras, carViewModel.Id);
+            carViewModel.Entartaiment = await this.featureService.GetAllOfTypeByCarIdAsync<FeatureViewModel>(GlobalConstants.FeatureTypeNameEntertainment, carViewModel.Id);
+            carViewModel.Comfort = await this.featureService.GetAllOfTypeByCarIdAsync<FeatureViewModel>(GlobalConstants.FeatureTypeNameComfort, carViewModel.Id);
+
             return this.View(carViewModel);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> EditAdCar(int id)
+        {
+            var carViewModel = this.carService.GetById<EditCarAdViewModel>(id);
+            var user = await this.userManager.GetUserAsync(this.User);
+            if (carViewModel == null)
+            {
+                return this.NotFound();
+            }
+
+            if (await this.IsUserAuthorOrAdmin(user, carViewModel.UserId))
+            {
+                return this.RedirectToAction("/");
+            }
+
+
+            if (carViewModel == null)
+            {
+                return this.NotFound();
+            }
+
+            carViewModel.Makes = this.makeCarService.GetAll<MakeInputViewModel>();
+            carViewModel.Models = this.modelCarService.GetAllByMakeId<ModelInputViewModel>(carViewModel.MakeId);
+            carViewModel.Bodies = this.bodyCarService.GetAll<BodyInputViewModel>();
+            carViewModel.Drives = this.engineService.GetAllByModelIdAndFuelId<DriveInputViewModel>(carViewModel.ModelId, carViewModel.FuelId);
+
+            carViewModel.CarFeatures = await this.featureService.GetAllByCarIdAsync<FeatureViewModel>(id);
+
+            carViewModel.Safety = await this.featureService.GetAllOfTypeAsync<FeatureViewModel>(GlobalConstants.FeatureTypeNameSafety);
+            carViewModel.Extras = await this.featureService.GetAllOfTypeAsync<FeatureViewModel>(GlobalConstants.FeatureTypeNameExtras);
+            carViewModel.Entartaiment = await this.featureService.GetAllOfTypeAsync<FeatureViewModel>(GlobalConstants.FeatureTypeNameEntertainment);
+            carViewModel.Comfort = await this.featureService.GetAllOfTypeAsync<FeatureViewModel>(GlobalConstants.FeatureTypeNameComfort);
+
+            return this.View(carViewModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> EditAdCar(EditCarAdViewModel input)
+        {
+            var carViewModel = this.carService.GetById<EditCarAdViewModel>(input.Id);
+            var user = await this.userManager.GetUserAsync(this.User);
+            if (carViewModel == null)
+            {
+                return this.NotFound();
+            }
+
+            if (await this.IsUserAuthorOrAdmin(user, input.UserId))
+            {
+                return this.RedirectToAction("Login", "Account");
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                input.Makes = this.makeCarService.GetAll<MakeInputViewModel>();
+                input.Models = this.modelCarService.GetAllByMakeId<ModelInputViewModel>(input.MakeId);
+                input.Bodies = this.bodyCarService.GetAll<BodyInputViewModel>();
+                input.Drives = this.engineService.GetAllByModelIdAndFuelId<DriveInputViewModel>(input.ModelId, input.FuelId);
+
+                input.CarFeatures = await this.featureService.GetAllByCarIdAsync<FeatureViewModel>(input.Id);
+
+                input.Safety = await this.featureService.GetAllOfTypeAsync<FeatureViewModel>(GlobalConstants.FeatureTypeNameSafety);
+                input.Extras = await this.featureService.GetAllOfTypeAsync<FeatureViewModel>(GlobalConstants.FeatureTypeNameExtras);
+                input.Entartaiment = await this.featureService.GetAllOfTypeAsync<FeatureViewModel>(GlobalConstants.FeatureTypeNameEntertainment);
+                input.Comfort = await this.featureService.GetAllOfTypeAsync<FeatureViewModel>(GlobalConstants.FeatureTypeNameComfort);
+
+                return this.View(input);
+            }
+
+            var carId = await this.carService.EditAsync(input.Id, input.MakeId, input.ModelId, input.DriveId, input.BodyId, input.Month, input.Year, input.Color, input.InputFeatures, input.Mileage, input.Price, input.Description);
+
+            return this.RedirectToAction(nameof(this.DetailsAdCar), "Cars", new { Id = carId });
+        }
+
+        private async Task<bool> IsUserAuthorOrAdmin(ApplicationUser user, string UserId)
+        {
+            if (user == null)
+            {
+                return false;
+            }
+
+            var bool1 = await this.IsUserAdmin(user);
+            var bool2 = UserId == user.Id;
+
+            return bool1 || bool2;
+        }
+
+        private async Task<bool> IsUserAdmin(ApplicationUser user)
+        {
+            if (user == null)
+            {
+                return false;
+            }
+
+            var userRoles = await this.userManager.GetRolesAsync(user);
+            return userRoles.Contains(GlobalConstants.AdministratorRoleName);
         }
     }
 }

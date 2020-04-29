@@ -12,6 +12,12 @@ namespace CarSalesApp.Web.ViewModels.Cars
     {
         public int Id { get; set; }
 
+        public bool IsUserAuthorOrAdmin { get; set; }
+
+        public string UserId { get; set; }
+
+        public ApplicationUser User { get; set; }
+
         public string MainImage { get; set; }//
 
         [Display(Name = "Make")]

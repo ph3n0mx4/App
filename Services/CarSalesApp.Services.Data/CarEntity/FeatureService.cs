@@ -52,5 +52,15 @@ namespace CarSalesApp.Services.Data.CarEntity
 
             return features;
         }
+
+        public async Task<ICollection<T>> GetAllByCarIdAsync<T>(int carId)
+        {
+            var features = await this.featureRepository.All()
+                .Where(x => x.CarsFeatures.Any(y => y.CarId == carId))
+                .To<T>()
+                .ToListAsync();
+
+            return features;
+        }
     }
 }

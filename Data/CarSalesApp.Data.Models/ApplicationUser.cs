@@ -14,6 +14,7 @@ namespace CarSalesApp.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.Cars = new HashSet<Car>();
         }
 
         // Audit info
@@ -29,6 +30,8 @@ namespace CarSalesApp.Data.Models
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+
+        public virtual ICollection<Car> Cars { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 

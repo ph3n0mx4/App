@@ -7,6 +7,8 @@ namespace CarSalesApp.Web.ViewModels.Cars
     {
         public int Id { get; set; }
 
+        public bool Checked { get; set; }
+
         public string Name { get; set; }
 
         public int TypeId { get; set; }

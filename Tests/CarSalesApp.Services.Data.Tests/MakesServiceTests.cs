@@ -13,19 +13,14 @@
     using Microsoft.EntityFrameworkCore;
     using Xunit;
 
-    public class MakesServiceTests
+    public class MakesServiceTests : BaseServiceTests
     {
-        private EfDeletableEntityRepository<Make> makesRepository;
-        private MakeCarService makesService;
-        private Make testMake1;
-        private Make testMake2;
+        private Make test1;
+        private Make test2;
 
         public MakesServiceTests()
         {
-            this.InitializeMapper();
-            this.InitializeDatabaseAndRepositories();
             this.InitializeFields();
-            this.makesService = new MakeCarService(this.makesRepository);
         }
 
         [Fact]
@@ -33,10 +28,10 @@
         {
             for (int i = 0; i < 3; i++)
             {
-                await this.makesService.AddAsync($"BMW{i}");
+                await this.MakesService.AddAsync($"BMW{i}");
             }
 
-            var isSuccessful = this.makesRepository.All().Count() == 3;
+            var isSuccessful = this.MakesRepository.All().Count() == 3;
 
             Assert.True(isSuccessful);
         }
@@ -44,8 +39,8 @@
         [Fact]
         public async Task AddAsyncReturnMakeIdAfterAdd()
         {
-            var makeId = await this.makesService.AddAsync($"BMW");
-            var expectedId = this.makesRepository.All().FirstOrDefault().Id;
+            var makeId = await this.MakesService.AddAsync($"BMW");
+            var expectedId = this.MakesRepository.All().FirstOrDefault().Id;
 
             Assert.Equal(expectedId, makeId);
         }
@@ -55,8 +50,8 @@
         {
             await this.SeedDatabase();
 
-            var makesCountActual = this.makesService.GetAll<MakeInputViewModel>().Count();
-            var expectedMakesCount = this.makesRepository.All().ToList().Count();
+            var makesCountActual = this.MakesService.GetAll<MakeInputViewModel>().Count();
+            var expectedMakesCount = this.MakesRepository.All().ToList().Count();
 
             Assert.Equal(expectedMakesCount, makesCountActual);
         }
@@ -71,7 +66,7 @@
         {
             await this.SeedDatabase();
 
-            var actualMake = this.makesService.GetByName<MakeInputViewModel>(input);
+            var actualMake = this.MakesService.GetByName<MakeInputViewModel>(input);
 
             Assert.Null(actualMake);
         }
@@ -81,7 +76,7 @@
         {
             await this.SeedDatabase();
 
-            var actualMake = this.makesService.GetByName<MakeInputViewModel>("BMW");
+            var actualMake = this.MakesService.GetByName<MakeInputViewModel>("BMW");
 
             Assert.Equal(123456, actualMake.Id);
         }
@@ -97,7 +92,7 @@
         {
             await this.SeedDatabase();
 
-            var result = this.makesService.IsHasMakeName(input);
+            var result = this.MakesService.IsHasMakeName(input);
 
             Assert.False(result);
         }
@@ -108,7 +103,7 @@
         {
             await this.SeedDatabase();
 
-            var result = this.makesService.IsHasMakeName(input);
+            var result = this.MakesService.IsHasMakeName(input);
 
             Assert.True(result);
         }
@@ -120,9 +115,9 @@
         {
             await this.SeedDatabase();
 
-            var actualMake = this.makesService.GetById<MakeInputViewModel>(id);
+            var actualMake = this.MakesService.GetById<MakeInputViewModel>(id);
 
-            var expectedMake = this.makesRepository.All()
+            var expectedMake = this.MakesRepository.All()
                 .Where(x => x.Id == id)
                 .To<MakeInputViewModel>()
                 .FirstOrDefault();
@@ -139,32 +134,20 @@
         {
             await this.SeedDatabase();
 
-            var actualMake = this.makesService.GetById<MakeInputViewModel>(id);
+            var actualMake = this.MakesService.GetById<MakeInputViewModel>(id);
 
             Assert.Null(actualMake);
         }
 
-        private void InitializeDatabaseAndRepositories()
-        {
-            var connection = new SqliteConnection("DataSource=:memory:");
-            connection.Open();
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>().UseSqlite(connection);
-            var dbContext = new ApplicationDbContext(options.Options);
-
-            dbContext.Database.EnsureCreated();
-
-            this.makesRepository = new EfDeletableEntityRepository<Make>(dbContext);
-        }
-
         private void InitializeFields()
         {
-            this.testMake1 = new Make
+            this.test1 = new Make
             {
                 Id = 789666,
                 Name = "Audi",
             };
 
-            this.testMake2 = new Make
+            this.test2 = new Make
             {
                 Id = 123456,
                 Name = "BMW",
@@ -173,12 +156,9 @@
 
         private async Task SeedDatabase()
         {
-            await this.makesRepository.AddAsync(this.testMake1);
-            await this.makesRepository.AddAsync(this.testMake2);
-            await this.makesRepository.SaveChangesAsync();
+            await this.MakesRepository.AddAsync(this.test1);
+            await this.MakesRepository.AddAsync(this.test2);
+            await this.MakesRepository.SaveChangesAsync();
         }
-
-        private void InitializeMapper() => AutoMapperConfig.
-            RegisterMappings(Assembly.Load("CarSalesApp.Web.ViewModels"));
     }
 }

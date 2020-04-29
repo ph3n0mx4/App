@@ -10,5 +10,7 @@ namespace CarSalesApp.Services.Data.CarEntity
         Task<ICollection<T>> GetAllOfTypeAsync<T>(string type);
 
         Task<ICollection<T>> GetAllOfTypeByCarIdAsync<T>(string type, int carId);
+
+        Task<ICollection<T>> GetAllByCarIdAsync<T>(int carId);
     }
 }
