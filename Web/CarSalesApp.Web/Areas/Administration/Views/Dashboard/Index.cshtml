@@ -3,10 +3,41 @@
     this.ViewData["Title"] = "Admin dashboard";
 }
 
-<h1>@this.ViewData["Title"]</h1>
-Settings: @this.Model.SettingsCount
 
-@foreach (var user in Model.CurrentUsers)
-{
-    <p>@user.Username</p> <a href="#">content</a>
-}
+<form class="" asp-area="Administration" asp-controller="Dashboard" asp-action="CreateAdmin" method="post" enctype="multipart/form-data">
+    <input asp-for="@Model.Username" type="text" value="" placeholder="Enter username" />
+    <button type="submit" class="btn btn-info">Add/Remove admin role</button>
+    <h4>List with users</h4>
+    <table class="card-title" style="width:70%">
+        <tr>
+            <th>Username</th>
+            <th>Role</th>
+
+        </tr>
+        <tr>
+            <th> </th>
+            <th> </th>
+        </tr>
+
+        @foreach (var user in Model.CurrentUsers)
+        {
+            <tr>
+                <td hidden></td>
+                <td><p>@user.Username</p></td>
+                @if (user.IsAdmin)
+                {
+                    <td>Admin</td>
+                }
+                else
+                {
+                    <td>-</td>
+                }
+
+            </tr>
+            
+        }
+    </table>
+
+</form>
+
+

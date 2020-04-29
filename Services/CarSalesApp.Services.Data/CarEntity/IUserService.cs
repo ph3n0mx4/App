@@ -10,6 +10,10 @@ namespace CarSalesApp.Services.Data.CarEntity
     {
         Task AddUserToRole(string username, string roleName);
 
+        Task RemoveUserFromRole(string username, string roleName);
+
         Task<IEnumerable<AllUsersViewModel>> GetAllUsersAsync();
+
+        Task<bool> IsAdmin (string username, string roleName);
     }
 }
