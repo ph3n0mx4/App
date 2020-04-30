@@ -1,9 +1,10 @@
-﻿using CarSalesApp.Data.Models;
-using CarSalesApp.Services.Mapping;
-using System.ComponentModel.DataAnnotations;
-
-namespace CarSalesApp.Web.ViewModels.Administration.Makes
+﻿namespace CarSalesApp.Web.ViewModels.Administration.Makes
 {
+    using System.ComponentModel.DataAnnotations;
+
+    using CarSalesApp.Data.Models;
+    using CarSalesApp.Services.Mapping;
+
     public class EditModelViewModel : IMapFrom<Model>
     {
         [Required]

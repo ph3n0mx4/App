@@ -1,8 +1,8 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace CarSalesApp.Web.ViewModels.Administration.Entities
+﻿namespace CarSalesApp.Web.ViewModels.Administration.Entities
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
     public class AddBodyViewModel
     {
         [Required]

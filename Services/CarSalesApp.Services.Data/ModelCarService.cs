@@ -1,15 +1,13 @@
-﻿using CarSalesApp.Data.Common.Repositories;
-using CarSalesApp.Data.Models;
-using CarSalesApp.Services.Mapping;
-//using CarSalesApp.Web.ViewModels.Cars;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.IO.Compression;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CarSalesApp.Services.Data
+﻿namespace CarSalesApp.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using CarSalesApp.Data.Common.Repositories;
+    using CarSalesApp.Data.Models;
+    using CarSalesApp.Services.Mapping;
+
     public class ModelCarService : IModelCarService
     {
         private readonly IDeletableEntityRepository<Model> modelRepository;
@@ -34,11 +32,7 @@ namespace CarSalesApp.Services.Data
 
         public async Task<int> AddAsync(string name, int makeId)
         {
-            //if (this.modelRepository.All()
-            //    .Any(x => x.Name == name)
-            //{
-
-            //}
+            //check for existing entity
             var model = new Model()
             {
                 Name = name,

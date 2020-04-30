@@ -1,15 +1,14 @@
-﻿using AutoMapper;
-using CarSalesApp.Data.Models;
-using CarSalesApp.Data.Models.Enums;
-using CarSalesApp.Services.Mapping;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace CarSalesApp.Web.ViewModels.Cars
+﻿namespace CarSalesApp.Web.ViewModels.Cars
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    using AutoMapper;
+    using CarSalesApp.Data.Models;
+    using CarSalesApp.Data.Models.Enums;
+    using CarSalesApp.Services.Mapping;
+
     public class EditCarAdViewModel : IMapFrom<Car>, IHaveCustomMappings
     {
         public int Id { get; set; }
@@ -93,7 +92,7 @@ namespace CarSalesApp.Web.ViewModels.Cars
                     x => x.MapFrom(z => (int)z.Drive.Fuel))
                 .ForMember(
                     x => x.Month,
-                    x => x.MapFrom(z =>(MonthsOfYear)z.FirstRegistration.Month))
+                    x => x.MapFrom(z => (MonthsOfYear)z.FirstRegistration.Month))
                 .ForMember(
                     x => x.Year,
                     x => x.MapFrom(z => z.FirstRegistration.Year));

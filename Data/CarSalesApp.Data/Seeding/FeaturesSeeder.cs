@@ -1,11 +1,12 @@
-﻿using CarSalesApp.Common;
-using CarSalesApp.Data.Models;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CarSalesApp.Data.Seeding
+﻿namespace CarSalesApp.Data.Seeding
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using CarSalesApp.Common;
+    using CarSalesApp.Data.Models;
+
     public class FeaturesSeeder : ISeeder
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
@@ -15,10 +16,10 @@ namespace CarSalesApp.Data.Seeding
                 return;
             }
 
-            var safety = dbContext.FeatureTypes.FirstOrDefault(x => x.Name == GlobalConstants.FeatureTypeNameSafety);//safety
-            var extras = dbContext.FeatureTypes.FirstOrDefault(x => x.Name == GlobalConstants.FeatureTypeNameExtras);//extras
-            var comfort = dbContext.FeatureTypes.FirstOrDefault(x => x.Name == GlobalConstants.FeatureTypeNameComfort);//comfort
-            var entertainment = dbContext.FeatureTypes.FirstOrDefault(x => x.Name == GlobalConstants.FeatureTypeNameEntertainment);//entertainment
+            var safety = dbContext.FeatureTypes.FirstOrDefault(x => x.Name == GlobalConstants.FeatureTypeNameSafety);
+            var extras = dbContext.FeatureTypes.FirstOrDefault(x => x.Name == GlobalConstants.FeatureTypeNameExtras);
+            var comfort = dbContext.FeatureTypes.FirstOrDefault(x => x.Name == GlobalConstants.FeatureTypeNameComfort);
+            var entertainment = dbContext.FeatureTypes.FirstOrDefault(x => x.Name == GlobalConstants.FeatureTypeNameEntertainment);
 
             await dbContext.Features.AddRangeAsync(
                 new Feature { Name = "Air conditioning", FeatureType = comfort },

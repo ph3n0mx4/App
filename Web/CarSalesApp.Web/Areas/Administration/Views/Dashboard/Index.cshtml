@@ -3,38 +3,35 @@
     this.ViewData["Title"] = "Admin dashboard";
 }
 
-
+<h4>List with users</h4>
 <form class="" asp-area="Administration" asp-controller="Dashboard" asp-action="CreateAdmin" method="post" enctype="multipart/form-data">
     <input asp-for="@Model.Username" type="text" value="" placeholder="Enter username" />
     <button type="submit" class="btn btn-info">Add/Remove admin role</button>
-    <h4>List with users</h4>
-    <table class="card-title" style="width:70%">
+    
+    <table class="" style="width:60%">
         <tr>
             <th>Username</th>
-            <th>Role</th>
+            <th>Admin</th>
 
-        </tr>
-        <tr>
-            <th> </th>
-            <th> </th>
         </tr>
 
         @foreach (var user in Model.CurrentUsers)
         {
+            <tr class="blank_row">
+                <td></td>
+            </tr>
             <tr>
-                <td hidden></td>
-                <td><p>@user.Username</p></td>
+                <td>@user.Username</td>
                 @if (user.IsAdmin)
                 {
-                    <td>Admin</td>
+                    <td>Yes</td>
                 }
                 else
                 {
-                    <td>-</td>
+                    <td>No</td>
                 }
-
             </tr>
-            
+
         }
     </table>
 

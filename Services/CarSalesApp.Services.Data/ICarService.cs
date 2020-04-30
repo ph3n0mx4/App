@@ -1,9 +1,10 @@
-﻿using CarSalesApp.Data.Models.Enums;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace CarSalesApp.Services.Data
+﻿namespace CarSalesApp.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using CarSalesApp.Data.Models.Enums;
+
     public interface ICarService
     {
         IEnumerable<T> GetAll<T>(int? count = null);

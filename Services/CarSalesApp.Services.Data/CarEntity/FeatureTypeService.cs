@@ -1,12 +1,13 @@
-﻿using CarSalesApp.Data.Common.Repositories;
-using CarSalesApp.Data.Models;
-using CarSalesApp.Services.Mapping;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CarSalesApp.Services.Data.CarEntity
+﻿namespace CarSalesApp.Services.Data.CarEntity
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using CarSalesApp.Data.Common.Repositories;
+    using CarSalesApp.Data.Models;
+    using CarSalesApp.Services.Mapping;
+
     public class FeatureTypeService : IFeatureTypeService
     {
         private readonly IDeletableEntityRepository<FeatureType> featureTypeRepository;

@@ -1,8 +1,9 @@
 ﻿namespace CarSalesApp.Data.Common.Repositories
 {
-    using CarSalesApp.Data.Common.Models;
     using System.Linq;
     using System.Threading.Tasks;
+
+    using CarSalesApp.Data.Common.Models;
 
     public interface IDeletableEntityRepository<TEntity> : IRepository<TEntity>
         where TEntity : class, IDeletableEntity

@@ -1,10 +1,11 @@
-﻿using CarSalesApp.Services.Data;
-using CarSalesApp.Web.ViewModels.Administration.Entities;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-
-namespace CarSalesApp.Web.Areas.Administration.Controllers
+﻿namespace CarSalesApp.Web.Areas.Administration.Controllers
 {
+    using System.Threading.Tasks;
+
+    using CarSalesApp.Services.Data;
+    using CarSalesApp.Web.ViewModels.Administration.Entities;
+    using Microsoft.AspNetCore.Mvc;
+
     public class BodiesController : AdministrationController
     {
         private readonly IBodyCarService bodyCarService;

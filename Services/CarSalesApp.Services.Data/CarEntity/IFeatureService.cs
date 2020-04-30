@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace CarSalesApp.Services.Data.CarEntity
+﻿namespace CarSalesApp.Services.Data.CarEntity
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     public interface IFeatureService
     {
         Task AddAsync(string name, int typeId);

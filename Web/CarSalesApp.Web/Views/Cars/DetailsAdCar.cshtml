@@ -5,11 +5,14 @@
     this.ViewData["Title"] = "Details Page";
 }
 
-<div class="row">
-    <div class="col-6 offset-1"><h2>@Model.Title</h2></div>
-    <div hidden class="col-5" align="right"><p><a href="~/Cars/EditAdCar/@Model.Id">Edit</a>&emsp;<a href="#">Delete</a></p></div>
-    
-</div>
+    <div class="row">
+        <div class="col-6 offset-1"><h2>@Model.Title</h2></div>
+        @if (Model.IsUserAuthorOrAdmin)
+        {
+            <div class="col-5" align="right"><p><a href="~/Cars/EditAdCar/@Model.Id">Edit</a>@*&emsp;<a href="#">Delete</a>*@</p></div>
+        }
+
+    </div>
 @*<br />*@
 <div class="offset-1">
     <!--style="ma2x-width: 540px;"-->

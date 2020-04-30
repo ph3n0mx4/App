@@ -1,14 +1,15 @@
-﻿using CarSalesApp.Data.Models;
-using CarSalesApp.Data.Models.Enums;
-using CarSalesApp.Services.Mapping;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace CarSalesApp.Web.ViewModels.Cars
+﻿namespace CarSalesApp.Web.ViewModels.Cars
 {
-    public class CreateAdCarInputFormViewModel : IMapFrom<Car> //, IHaveCustomMappings
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    using CarSalesApp.Data.Models;
+    using CarSalesApp.Data.Models.Enums;
+    using CarSalesApp.Services.Mapping;
+    using Microsoft.AspNetCore.Http;
+
+    public class CreateAdCarInputFormViewModel : IMapFrom<Car>
     {
         public string UserId { get; set; }
 
@@ -68,7 +69,7 @@ namespace CarSalesApp.Web.ViewModels.Cars
         [MinLength(10)]
         public string Description { get; set; }
 
-        //[Required(ErrorMessage = "Mark at least one")]
+        [Required(ErrorMessage = "Mark at least one")]
         [Display(Name = "Equipment")]
         public ICollection<int> InputFeatures { get; set; }
 
@@ -79,7 +80,5 @@ namespace CarSalesApp.Web.ViewModels.Cars
         public IEnumerable<FeatureViewModel> Comfort { get; set; }
 
         public IEnumerable<FeatureViewModel> Extras { get; set; }
-
-
     }
 }

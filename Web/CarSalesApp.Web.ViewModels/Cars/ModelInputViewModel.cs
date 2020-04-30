@@ -1,8 +1,8 @@
-﻿using CarSalesApp.Data.Models;
-using CarSalesApp.Services.Mapping;
-
-namespace CarSalesApp.Web.ViewModels.Cars
+﻿namespace CarSalesApp.Web.ViewModels.Cars
 {
+    using CarSalesApp.Data.Models;
+    using CarSalesApp.Services.Mapping;
+
     public class ModelInputViewModel : IMapFrom<Model>
     {
         public string Name { get; set; }

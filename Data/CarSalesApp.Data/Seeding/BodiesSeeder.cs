@@ -1,11 +1,12 @@
-﻿using CarSalesApp.Data.Models;
-using CarSalesApp.Data.Models.Enums;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CarSalesApp.Data.Seeding
+﻿namespace CarSalesApp.Data.Seeding
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using CarSalesApp.Data.Models;
+    using CarSalesApp.Data.Models.Enums;
+
     public class BodiesSeeder : ISeeder
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)

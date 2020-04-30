@@ -1,10 +1,11 @@
-﻿using CarSalesApp.Data.Models;
-using CarSalesApp.Services.Mapping;
-using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace CarSalesApp.Web.ViewModels.Administration.Engines
+﻿namespace CarSalesApp.Web.ViewModels.Administration.Engines
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
+    using CarSalesApp.Data.Models;
+    using CarSalesApp.Services.Mapping;
+
     public class EditEngineViewModel : IMapFrom<Drive>
     {
         public int Id { get; set; }

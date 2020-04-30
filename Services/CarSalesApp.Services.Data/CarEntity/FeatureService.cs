@@ -1,13 +1,14 @@
-﻿using CarSalesApp.Data.Common.Repositories;
-using CarSalesApp.Data.Models;
-using CarSalesApp.Services.Mapping;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CarSalesApp.Services.Data.CarEntity
+﻿namespace CarSalesApp.Services.Data.CarEntity
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using CarSalesApp.Data.Common.Repositories;
+    using CarSalesApp.Data.Models;
+    using CarSalesApp.Services.Mapping;
+    using Microsoft.EntityFrameworkCore;
+
     public class FeatureService : IFeatureService
     {
         private readonly IDeletableEntityRepository<Feature> featureRepository;

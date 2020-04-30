@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace CarSalesApp.Services.Data
+﻿namespace CarSalesApp.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     public interface IMakeCarService
     {
         IEnumerable<T> GetAll<T>();

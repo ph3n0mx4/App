@@ -1,15 +1,12 @@
-﻿using CarSalesApp.Data.Models;
-using CarSalesApp.Web.ViewModels.Cars;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-using CarSalesApp.Services.Mapping;
-
-namespace CarSalesApp.Services.Data.Tests
+﻿namespace CarSalesApp.Services.Data.Tests
 {
+    using CarSalesApp.Data.Models;
+    using CarSalesApp.Services.Mapping;
+    using CarSalesApp.Web.ViewModels.Cars;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Xunit;
+
     public class ModelsServiceTests : BaseServiceTests
     {
         private Model test1;

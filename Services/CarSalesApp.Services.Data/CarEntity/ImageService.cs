@@ -1,9 +1,10 @@
-﻿using CarSalesApp.Data.Common.Repositories;
-using CarSalesApp.Data.Models;
-using System.Threading.Tasks;
-
-namespace CarSalesApp.Services.Data.CarEntity
+﻿namespace CarSalesApp.Services.Data.CarEntity
 {
+    using System.Threading.Tasks;
+
+    using CarSalesApp.Data.Common.Repositories;
+    using CarSalesApp.Data.Models;
+
     public class ImageService : IImageService
     {
         private readonly IDeletableEntityRepository<Image> imageRepository;

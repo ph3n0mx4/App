@@ -1,11 +1,12 @@
-﻿using AutoMapper;
-using CarSalesApp.Data.Models;
-using CarSalesApp.Services.Mapping;
-using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace CarSalesApp.Web.ViewModels.Administration.Engines
+﻿namespace CarSalesApp.Web.ViewModels.Administration.Engines
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
+    using AutoMapper;
+    using CarSalesApp.Data.Models;
+    using CarSalesApp.Services.Mapping;
+
     public class DetailsEngineViewModel : IMapFrom<Drive>, IHaveCustomMappings
     {
         [Required]

@@ -1,10 +1,11 @@
-﻿using CarSalesApp.Data.Models;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CarSalesApp.Data.Seeding
+﻿namespace CarSalesApp.Data.Seeding
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using CarSalesApp.Data.Models;
+
     public class ModelsSeeder : ISeeder
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)

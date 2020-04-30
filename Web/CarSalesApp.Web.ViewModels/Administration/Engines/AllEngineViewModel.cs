@@ -1,12 +1,12 @@
-﻿using CarSalesApp.Data.Models;
-using CarSalesApp.Data.Models.Enums;
-using CarSalesApp.Services.Mapping;
-using CarSalesApp.Web.ViewModels.Cars;
-using System;
-using System.Collections.Generic;
-
-namespace CarSalesApp.Web.ViewModels.Administration.Engines
+﻿namespace CarSalesApp.Web.ViewModels.Administration.Engines
 {
+    using CarSalesApp.Data.Models;
+    using CarSalesApp.Data.Models.Enums;
+    using CarSalesApp.Services.Mapping;
+    using CarSalesApp.Web.ViewModels.Cars;
+    using System;
+    using System.Collections.Generic;
+
     public class AllEngineViewModel : IMapFrom<Drive>
     {
         public int Id { get; set; }

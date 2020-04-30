@@ -1,13 +1,14 @@
-﻿using CarSalesApp.Data.Common.Repositories;
-using CarSalesApp.Data.Models;
-using CarSalesApp.Data.Models.Enums;
-using CarSalesApp.Services.Mapping;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CarSalesApp.Services.Data
+﻿namespace CarSalesApp.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using CarSalesApp.Data.Common.Repositories;
+    using CarSalesApp.Data.Models;
+    using CarSalesApp.Data.Models.Enums;
+    using CarSalesApp.Services.Mapping;
+
     public class BodyCarService : IBodyCarService
     {
         private readonly IDeletableEntityRepository<Body> bodyRepository;

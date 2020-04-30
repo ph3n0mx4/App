@@ -1,17 +1,15 @@
-﻿using CarSalesApp.Data.Common.Repositories;
-using CarSalesApp.Data.Models;
-using CarSalesApp.Services.Data.CarEntity;
-using CarSalesApp.Services.Mapping;
-using CarSalesApp.Web.ViewModels.Administration.Dashboard;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CarSalesApp.Services.Data
+﻿namespace CarSalesApp.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using CarSalesApp.Data.Common.Repositories;
+    using CarSalesApp.Data.Models;
+    using CarSalesApp.Services.Mapping;
+    using CarSalesApp.Web.ViewModels.Administration.Dashboard;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+
     public class UserService : IUserService
     {
         private readonly IDeletableEntityRepository<ApplicationUser> userRepository;

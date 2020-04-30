@@ -55,7 +55,7 @@ namespace CarSalesApp.Data.Migrations
                 columns: table => new
                 {
                     CarId = table.Column<int>(nullable: false),
-                    FeatureId = table.Column<int>(nullable: false)
+                    FeatureId = table.Column<int>(nullable: false),
                 },
                 constraints: table =>
                 {

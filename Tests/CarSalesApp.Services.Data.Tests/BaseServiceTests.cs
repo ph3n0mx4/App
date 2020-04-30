@@ -4,8 +4,10 @@ using CarSalesApp.Data.Repositories;
 using CarSalesApp.Data.Seeding;
 using CarSalesApp.Services.Data.CarEntity;
 using CarSalesApp.Services.Mapping;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -25,7 +27,6 @@ namespace CarSalesApp.Services.Data.Tests
             this.DrivesService = new EngineService(this.DrivesRepository);
             this.ImagesService = new ImageService(this.ImagesRepository);
             this.CarsService = new CarService(this.CarsRepository, this.FeaturesRepository, this.CarsFeaturessRepository);
-
         }
 
         public SqliteConnection Connection { get; set; }
@@ -62,6 +63,10 @@ namespace CarSalesApp.Services.Data.Tests
 
         protected EfDeletableEntityRepository<CarFeature> CarsFeaturessRepository { get; set; }
 
+        protected UserService UsersService { get; set; }
+
+        protected EfDeletableEntityRepository<ApplicationUser> UsersRepository { get; set; }
+
         public void Dispose()
         {
             this.Connection.Close();
@@ -86,6 +91,7 @@ namespace CarSalesApp.Services.Data.Tests
             this.DrivesRepository = new EfDeletableEntityRepository<Drive>(dbContext);
             this.ImagesRepository = new EfDeletableEntityRepository<Image>(dbContext);
             this.CarsFeaturessRepository = new EfDeletableEntityRepository<CarFeature>(dbContext);
+            this.UsersRepository = new EfDeletableEntityRepository<ApplicationUser>(dbContext);
         }
 
         private void InitializeMapper() => AutoMapperConfig.

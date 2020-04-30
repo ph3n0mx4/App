@@ -1,12 +1,9 @@
-﻿using AutoMapper;
-using CarSalesApp.Data.Models;
-using CarSalesApp.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CarSalesApp.Web.ViewModels.Administration.Dashboard
+﻿namespace CarSalesApp.Web.ViewModels.Administration.Dashboard
 {
+    using CarSalesApp.Data.Models;
+    using CarSalesApp.Services.Mapping;
+    using System.Collections.Generic;
+
     public class AllUsersViewModel : IMapFrom<ApplicationUser>
     {
         public string Id { get; set; }

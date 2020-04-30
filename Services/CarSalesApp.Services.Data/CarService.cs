@@ -14,7 +14,7 @@
     {
         private IDeletableEntityRepository<Car> carRepository;
         private IDeletableEntityRepository<Feature> featureRepository;
-        private readonly IDeletableEntityRepository<CarFeature> carFeatureRepository;
+        private IDeletableEntityRepository<CarFeature> carFeatureRepository;
 
         public CarService(IDeletableEntityRepository<Car> carRepository, IDeletableEntityRepository<Feature> featureRepository, IDeletableEntityRepository<CarFeature> carFeatureRepository)
         {

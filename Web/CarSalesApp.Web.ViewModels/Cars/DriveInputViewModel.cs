@@ -1,10 +1,11 @@
-﻿using CarSalesApp.Data.Models;
-using CarSalesApp.Data.Models.Enums;
-using CarSalesApp.Services.Mapping;
-using System;
-
-namespace CarSalesApp.Web.ViewModels.Cars
+﻿namespace CarSalesApp.Web.ViewModels.Cars
 {
+    using System;
+
+    using CarSalesApp.Data.Models;
+    using CarSalesApp.Data.Models.Enums;
+    using CarSalesApp.Services.Mapping;
+
     public class DriveInputViewModel : IMapFrom<Drive>//, IHaveCustomMappings
     {
         public int Id { get; set; }

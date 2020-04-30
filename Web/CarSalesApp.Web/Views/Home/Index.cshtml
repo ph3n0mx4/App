@@ -7,32 +7,36 @@
 
     <div class="text-center">
         <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
 
         @foreach (var car in Model.Cars)
         {
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <a href="Cars/DetailsAdCar/@car.Id"><img src="@GlobalConstants.CloudinaryPath@car.MainImage" class="card-img" alt="GeneralImage"></a>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-sm-6">
                         <div class="card-body">
                             <h5 class="card-title">@car.Title</h5>
-                            <p class="card-text">@car.Power</p>
+                            <p class="card-text">@car.Drive.Fuel</p>
+                            <p class="card-text">@car.Drive.GearType</p>
                             <p class="card-text">@car.Description</p>
                             <p class="card-text">@car.FirstRegistration</p>
-                            <p class="card-text"><small class="text-muted">@car.CreatedOn ( if modified on is null) or @car.ModifiedOn</small></p>
+
                         </div>
                     </div>
                 </div>
+                @if (car.ModifiedOn == null)
+                {
+                    <p class="card-text offset-5"><small class="text-muted">Created on @car.CreatedOn</small></p>
+                }
+                else
+                {
+                    <p class="card-text offset-5"><small class="text-muted">Modifited on @car.ModifiedOn</small></p>
+                }
             </div>
         }
     </div>
 
-<form method="get" action="/Home/Privacy">
-    <button type="submit" class="btn btn-primary">Privacy</button>
-</form>
-<!--<button type="submit" class="btn" <a href="/Home/Privacy"</a>Privacy></button>
-<a class="nav-link text-dark" asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>-->
 

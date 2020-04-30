@@ -1,18 +1,18 @@
-﻿using CarSalesApp.Data.Models;
-using CarSalesApp.Data.Models.Enums;
-using CarSalesApp.Web.ViewModels.Cars;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-using CarSalesApp.Services.Mapping;
-
-namespace CarSalesApp.Services.Data.Tests
+﻿namespace CarSalesApp.Services.Data.Tests
 {
+    using CarSalesApp.Data.Models;
+    using CarSalesApp.Data.Models.Enums;
+    using CarSalesApp.Services.Mapping;
+    using CarSalesApp.Web.ViewModels.Cars;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Xunit;
+
     public class CarsServiceTests : BaseServiceTests
     {
+        private ApplicationUser user;
         private Car test1;
         private Make test2;
         private Model test3;
@@ -33,13 +33,27 @@ namespace CarSalesApp.Services.Data.Tests
         {
             await this.SeedDatabase();
 
-            //var actualModelId = await this.CarsService.AddAsync(10, 11, 13, 12, (MonthsOfYear)1, 2002, (ColorType)1, new List<int> { 1, 2, 3 }, new List<string> { "image1", "image2", }, 1000000, 9999.99m, "MainImage1", "Description1");
+            var actualModelId = await this.CarsService.AddAsync(10, 11, 13, 12, (MonthsOfYear)1, 2002, (ColorType)1, new List<int> { 1, 2, 3 }, new List<string> { "image1", "image2", }, 1000000, 9999.99m, "MainImage1", "Description1", "appuser");
 
             var expectedModelId = this.CarsRepository.All()
                 .Where(x => x.MakeId == 10 && x.ModelId == 11 && x.DriveId == 13 && x.BodyId == 12 && x.MainImage == "MainImage1" && x.Description == "Description1" && x.Price == 9999.99m && x.Mileage == 1000000 && x.FirstRegistration.Year == 2002 && x.FirstRegistration.Month == 1)
                 .Select(x => x.Id).FirstOrDefault();
 
-            //Assert.Equal(expectedModelId, actualModelId);
+            Assert.Equal(expectedModelId, actualModelId);
+        }
+
+        [Fact]
+        public async Task EditAsyncWorkCorrectly()
+        {
+            await this.SeedDatabase();
+            var car = this.CarsService.GetById<EditCarAdViewModel>(999999);
+            var actualCarlId = await this.CarsService.EditAsync(999999, 10, 11, 13, 12, (MonthsOfYear)10, 2002, (ColorType)1, new List<int> { 1, 2, 3 }, 1000000, 19999.99m, "Description12");
+
+            var expectedCarId = this.CarsRepository.All()
+                .Where(x => x.MakeId == 10 && x.ModelId == 11 && x.DriveId == 13 && x.BodyId == 12 && x.Description == "Description12" && x.Price == 19999.99m && x.Mileage == 1000000 && x.FirstRegistration.Year == 2002 && x.FirstRegistration.Month == 10)
+                .Select(x => x.Id).FirstOrDefault();
+
+            Assert.Equal(expectedCarId, actualCarlId);
         }
 
         [Theory]
@@ -61,9 +75,9 @@ namespace CarSalesApp.Services.Data.Tests
 
         [Fact]
         public async Task GetAllReturnWholeCount()
-        {//zaradi userId
+        {
             await this.SeedDatabase();
-            //var actualModelId = await this.CarsService.AddAsync(10, 11, 13, 12, (MonthsOfYear)1, 2002, (ColorType)1, new List<int> { 1, 2, 3 }, new List<string> { "image1", "image2", }, 1000000, 9999.99m, "MainImage1", "Description1");
+            var actualModelId = await this.CarsService.AddAsync(10, 11, 13, 12, (MonthsOfYear)1, 2002, (ColorType)1, new List<int> { 1, 2, 3 }, new List<string> { "image1", "image2", }, 1000000, 9999.99m, "MainImage1", "Description1", "appuser");
 
             var actualCarsCount = this.CarsService.GetAll<CarAdDetailsViewModel>().Count();
             var expectedCarsCount = this.CarsRepository.All().ToList().Count();
@@ -71,6 +85,7 @@ namespace CarSalesApp.Services.Data.Tests
             Assert.Equal(expectedCarsCount, actualCarsCount);
             Assert.Equal(2, actualCarsCount);
         }
+
         private void InitializeFields()
         {
             this.test1 = new Car
@@ -86,6 +101,7 @@ namespace CarSalesApp.Services.Data.Tests
                 Mileage = 1000000,
                 MainImage = "MainImage",
                 Description = "Description",
+                User = this.user,
             };
 
             this.test2 = new Make
@@ -145,11 +161,16 @@ namespace CarSalesApp.Services.Data.Tests
                 Id = 1,
                 Name = "a",
             };
-        }
 
+            this.user = new ApplicationUser
+            {
+                Id = "appuser",
+            };
+        }
 
         private async Task SeedDatabase()
         {
+            await this.UsersRepository.AddAsync(this.user);
             await this.CarsRepository.AddAsync(this.test1);
             await this.MakesRepository.AddAsync(this.test2);
             await this.ModelsRepository.AddAsync(this.test3);
@@ -166,7 +187,7 @@ namespace CarSalesApp.Services.Data.Tests
             await this.FeatureTypesRepository.SaveChangesAsync();
             await this.FeaturesRepository.SaveChangesAsync();
             await this.CarsRepository.SaveChangesAsync();
+            await this.UsersRepository.SaveChangesAsync();
         }
     }
-    
 }

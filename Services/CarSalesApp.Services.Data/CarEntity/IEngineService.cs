@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace CarSalesApp.Services.Data.CarEntity
+﻿namespace CarSalesApp.Services.Data.CarEntity
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     public interface IEngineService
     {
         Task<int> AddAsync(int modelId, int fuelId, int cc, int power, int gear, int gearType, int yearFrom, int yearTo);

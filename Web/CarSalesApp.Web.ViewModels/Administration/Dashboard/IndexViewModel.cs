@@ -1,9 +1,8 @@
-﻿using CarSalesApp.Data.Models;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace CarSalesApp.Web.ViewModels.Administration.Dashboard
+﻿namespace CarSalesApp.Web.ViewModels.Administration.Dashboard
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class IndexViewModel
     {
         public string Username { get; set; }
@@ -12,6 +11,5 @@ namespace CarSalesApp.Web.ViewModels.Administration.Dashboard
 
         [Display(Name ="Users")]
         public IEnumerable<AllUsersViewModel> CurrentUsers { get; set; }
-
     }
 }

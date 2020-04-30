@@ -46,7 +46,7 @@
             {
                 await this.userService.AddUserToRole(input.Username, GlobalConstants.AdministratorRoleName);
             }
-            
+
             return this.RedirectToAction(nameof(this.Index));
         }
     }
